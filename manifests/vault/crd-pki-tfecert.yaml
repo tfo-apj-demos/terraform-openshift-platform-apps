@@ -1,0 +1,16 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultPKISecret
+metadata:
+  name: tfecert
+  namespace: tfe
+spec:
+  destination:
+    create: true
+    overwrite: true
+    name: tfe-certificate
+    type: kubernetes.io/tls
+  role: gcve
+  mount: pki
+  commonName: tfe.hashicorp.local
+  format: pem_bundle
+  vaultAuthRef: vaultauth-tfe

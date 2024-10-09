@@ -1,0 +1,37 @@
+apiVersion: eda.ansible.com/v1alpha1
+kind: EDA
+metadata:
+  name: eda
+  namespace: aap
+spec:
+  route_tls_termination_mechanism: Edge
+  ingress_type: Route
+  loadbalancer_port: 80
+  no_log: true
+  activation_worker:
+    replicas: 5
+  image_pull_policy: IfNotPresent
+  ipv6_disabled: false
+  ui:
+    replicas: 1
+  set_self_labels: true
+  api:
+    gunicorn_workers: 2
+    replicas: 1
+  force_drop_db: false
+  scheduler:
+    replicas: 1
+  redis:
+    replicas: 1
+  admin_user: admin
+  loadbalancer_protocol: http
+  default_worker:
+    replicas: 2
+  worker:
+    replicas: 2
+  automation_server_url: 'https://controller-aap.apps.openshift-01.hashicorp.local/'
+  hostname: eda
+  route_host: eda-aap.apps.openshift-01.hashicorp.local
+  service_type: ClusterIP
+  database:
+    postgres_storage_class: ocs-storagecluster-cephfs

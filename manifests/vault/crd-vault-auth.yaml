@@ -1,0 +1,14 @@
+kind: VaultAuth
+apiVersion: secrets.hashicorp.com/v1beta1
+metadata:
+  name: vaultauth-tfe
+  namespace: tfe
+spec:
+  vaultConnectionRef: vaultconnection-gcve
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: tfe
+    serviceAccount: vault-auth
+    audiences: 
+      - vault
