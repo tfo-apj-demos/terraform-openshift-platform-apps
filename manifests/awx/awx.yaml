@@ -1,0 +1,12 @@
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+  namespace: awx
+spec:
+  service_type: ClusterIP
+  ingress_type: Route
+  hostname: awx.hashicorp.local
+  admin_user: admin
+  admin_password_secret: awx-admin-password
+  postgres_storage_class: ocs-storagecluster-cephfs
