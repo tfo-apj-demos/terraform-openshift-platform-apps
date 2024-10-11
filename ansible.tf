@@ -1,9 +1,9 @@
-# locals {
-# # Ansible Automation Platform
-# aap_controller = file("${path.module}/manifests/ansible/aap-controller.yaml")
-# aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
-# aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
-# }
+locals {
+# Ansible Automation Platform
+aap_controller = file("${path.module}/manifests/ansible/aap-controller.yaml")
+aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
+aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
+}
 
 
 # import {
