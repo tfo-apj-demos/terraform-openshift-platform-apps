@@ -71,7 +71,6 @@ import {
 }
 
 resource "kubernetes_secret" "tfe-secrets" {
-  depends_on = [ kubernetes_manifest.s3bucket-tfeapp ]
   metadata {
     name = "tfe-secrets"
     namespace = "tfe"
