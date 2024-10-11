@@ -14,6 +14,9 @@ import {
 # Ansible Controller resource
 resource "kubernetes_manifest" "aap-controller" {
   manifest = provider::kubernetes::manifest_decode(local.aap_controller)
+  field_manager {
+    force_conflicts = true
+  }
 }
 
 
