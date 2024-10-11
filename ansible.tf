@@ -16,15 +16,15 @@ aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
 #   manifest = provider::kubernetes::manifest_decode(local.aap_controller)
 # }
 
-# import {
-#   to = kubernetes_manifest.aap-eda
-#   id = "apiVersion=eda.ansible.com/v1alpha1,kind=EDA,namespace=aap,name=eda"
-# }
+import {
+  to = kubernetes_manifest.aap-eda
+  id = "apiVersion=eda.ansible.com/v1alpha1,kind=EDA,namespace=aap,name=eda"
+}
 
-# # Ansible EDA resource
-# resource "kubernetes_manifest" "aap-eda" {
-#   manifest = provider::kubernetes::manifest_decode(local.aap_eda)
-# }
+# Ansible EDA resource
+resource "kubernetes_manifest" "aap-eda" {
+  manifest = provider::kubernetes::manifest_decode(local.aap_eda)
+}
 
 
 # Ansible Automation Hub
