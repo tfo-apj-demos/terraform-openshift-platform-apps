@@ -6,15 +6,15 @@ aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
 }
 
 
-# import {
-#   to = kubernetes_manifest.aap-controller
-#   id = "apiVersion=automationcontroller.ansible.com/v1beta1,kind=AutomationController,namespace=aap,name=controller"
-# }
+import {
+  to = kubernetes_manifest.aap-controller
+  id = "apiVersion=automationcontroller.ansible.com/v1beta1,kind=AutomationController,namespace=aap,name=controller"
+}
 
-# # Ansible Controller resource
-# resource "kubernetes_manifest" "aap-controller" {
-#   manifest = provider::kubernetes::manifest_decode(local.aap_controller)
-# }
+# Ansible Controller resource
+resource "kubernetes_manifest" "aap-controller" {
+  manifest = provider::kubernetes::manifest_decode(local.aap_controller)
+}
 
 
 # Ansible EDA resource
