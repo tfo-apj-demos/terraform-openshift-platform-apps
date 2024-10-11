@@ -1,5 +1,5 @@
 import {
-  to = helm_release.tfe
+  to = tfe/helm_release.tfe
   id = "terraform-enterprise"
 }
 
