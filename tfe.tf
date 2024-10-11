@@ -1,6 +1,6 @@
 import {
-  to = tfe/helm_release.tfe
-  id = "terraform-enterprise"
+  to = helm_release.tfe
+  id = "tfe/terraform-enterprise"
 }
 
 # deploy tfe using helm chart
