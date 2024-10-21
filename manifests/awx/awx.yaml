@@ -10,5 +10,5 @@ spec:
   admin_user: admin
   postgres_storage_class: ocs-storagecluster-cephfs
   admin_password_secret: awx-admin-password
-  no_log: false
+  no_log: true
   
