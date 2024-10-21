@@ -9,5 +9,6 @@ spec:
   hostname: awx.hashicorp.local
   admin_user: admin
   postgres_storage_class: ocs-storagecluster-cephfs
-  #admin_password_secret: awx-admin-password
+  admin_password_secret: awx-admin-password
+  no_log: false
   
