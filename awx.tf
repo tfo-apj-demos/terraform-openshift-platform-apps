@@ -15,7 +15,7 @@ resource "kubernetes_secret_v1" "awx-admin-password" {
 }
 
 resource "kubernetes_manifest" "awx" {
-  depends_on = [ kubernetes_namespace.kubernetes_secret_v1.awx-admin-password ]
+  depends_on = [ kubernetes_secret_v1.awx-admin-password ]
   manifest = provider::kubernetes::manifest_decode(local.awx)
   field_manager {
     force_conflicts = true
