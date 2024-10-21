@@ -6,7 +6,7 @@ metadata:
 spec:
   service_type: ClusterIP
   ingress_type: Route
-  hostname: awx.hashicorp.local
+  hostname: awx
   admin_user: admin
   postgres_storage_class: ocs-storagecluster-cephfs
   admin_password_secret: awx-admin-password
