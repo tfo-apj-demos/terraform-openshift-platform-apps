@@ -42,3 +42,9 @@ variable "tfe_encryption_password" {
   sensitive = true
   default = "terraformenterprise"
 }
+
+variable "awx_admin_password" {
+  description = "The AWX admin password."
+  type        = string
+  sensitive = true
+}
