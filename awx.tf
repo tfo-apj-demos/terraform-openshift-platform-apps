@@ -10,7 +10,7 @@ resource "kubernetes_secret_v1" "awx-admin-password" {
   }
 
   data = {
-    "awx-admin-password" = var.awx_admin_password
+    "password" = var.awx_admin_password
   }
 }
 
