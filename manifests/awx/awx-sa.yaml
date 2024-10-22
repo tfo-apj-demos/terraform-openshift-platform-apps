@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: system:auth-delegator
 subjects:
-- kind: ServiceAccount
-  name: awx
-  namespace: awx
+  - kind: ServiceAccount
+    name: awx
+    namespace: awx
