@@ -1,7 +1,7 @@
 locals {
   # Ansible Automation Platform
   awx = file("${path.module}/manifests/awx/awx.yaml")
-  awx-vault-auth-sa = file("${path.module}/manifests/awx/aws-vault-auth-sa.yaml")
+  awx-vault-auth-sa = file("${path.module}/manifests/awx/awx-vault-auth-sa.yaml")
   awx-clusterrolebinding = file("${path.module}/manifests/awx/awx-clusterrolebinding.yaml")
 }
 
