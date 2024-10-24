@@ -1,8 +1,8 @@
 locals {
-# Ansible Automation Platform
-awx = file("${path.module}/manifests/awx/awx.yaml")
-vault-auth-sa = file("${path.module}/manifests/awx/vault-auth-sa.yaml")
-awx-clusterrolebinding = file("${path.module}/manifests/awx/awx-clusterrolebinding.yaml")
+  # Ansible Automation Platform
+  awx = file("${path.module}/manifests/awx/awx.yaml")
+  vault-auth-sa = file("${path.module}/manifests/awx/vault-auth-sa.yaml")
+  awx-clusterrolebinding = file("${path.module}/manifests/awx/awx-clusterrolebinding.yaml")
 }
 
 resource "kubernetes_secret_v1" "awx-admin-password" {
