@@ -1,8 +1,10 @@
 locals {
-# Ansible Automation Platform
-aap_controller = file("${path.module}/manifests/ansible/aap-controller.yaml")
-aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
-aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
+  # Ansible Automation Platform
+  aap_controller = file("${path.module}/manifests/ansible/aap-controller.yaml")
+  aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
+  aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
+  aap-vault-auth-sa = file("${path.module}/manifests/ansible/aap-vault-auth-sa.yaml")
+  aap-clusterrolebinding = file("${path.module}/manifests/ansible/aap-clusterrolebinding.yaml")
 }
 
 
@@ -29,4 +31,12 @@ resource "kubernetes_manifest" "aap-eda" {
 # Ansible Automation Hub
 resource "kubernetes_manifest" "aap-hub" {
   manifest = provider::kubernetes::manifest_decode(local.aap_hub)
+}
+
+resource "kubernetes_manifest" "awx-sa" {
+  manifest = provider::kubernetes::manifest_decode(local.aap-vault-auth-sa)
+}
+
+resource "kubernetes_manifest" "awx-clusterrolebinding" {
+  manifest = provider::kubernetes::manifest_decode(local.aap-clusterrolebinding)
 }

@@ -1,7 +1,7 @@
 locals {
   # Ansible Automation Platform
   awx = file("${path.module}/manifests/awx/awx.yaml")
-  vault-auth-sa = file("${path.module}/manifests/awx/vault-auth-sa.yaml")
+  awx-vault-auth-sa = file("${path.module}/manifests/awx/aws-vault-auth-sa.yaml")
   awx-clusterrolebinding = file("${path.module}/manifests/awx/awx-clusterrolebinding.yaml")
 }
 
@@ -26,7 +26,7 @@ resource "kubernetes_manifest" "awx" {
 
 resource "kubernetes_manifest" "awx-sa" {
   depends_on = [ kubernetes_manifest.awx ]
-  manifest = provider::kubernetes::manifest_decode(local.vault-auth-sa)
+  manifest = provider::kubernetes::manifest_decode(local.awx-vault-auth-sa)
   field_manager {
     force_conflicts = true
   }
