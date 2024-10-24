@@ -12,6 +12,5 @@ spec:
   port:
     targetPort: https-port
   tls:
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
+    termination: passthrough
   wildcardPolicy: None
