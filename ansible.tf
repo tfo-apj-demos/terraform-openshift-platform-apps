@@ -4,7 +4,6 @@ locals {
   aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
   aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
   aap-vault-auth-sa = file("${path.module}/manifests/ansible/aap-vault-auth-sa.yaml")
-  aap-clusterrolebinding = file("${path.module}/manifests/ansible/aap-clusterrolebinding.yaml")
 }
 
 
