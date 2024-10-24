@@ -33,10 +33,10 @@ resource "kubernetes_manifest" "aap-hub" {
   manifest = provider::kubernetes::manifest_decode(local.aap_hub)
 }
 
-resource "kubernetes_manifest" "awx-sa" {
+resource "kubernetes_manifest" "aap-sa" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vault-auth-sa)
 }
 
-resource "kubernetes_manifest" "awx-clusterrolebinding" {
+resource "kubernetes_manifest" "aap-clusterrolebinding" {
   manifest = provider::kubernetes::manifest_decode(local.aap-clusterrolebinding)
 }
