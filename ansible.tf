@@ -36,7 +36,3 @@ resource "kubernetes_manifest" "aap-hub" {
 resource "kubernetes_manifest" "aap-sa" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vault-auth-sa)
 }
-
-resource "kubernetes_manifest" "aap-clusterrolebinding" {
-  manifest = provider::kubernetes::manifest_decode(local.aap-clusterrolebinding)
-}
