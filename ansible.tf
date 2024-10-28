@@ -4,7 +4,18 @@ locals {
   # aap_hub= file("${path.module}/manifests/ansible/aap-hub.yaml")
   # aap_eda = file("${path.module}/manifests/ansible/aap-eda.yaml")
   aap-vault-auth-sa = file("${path.module}/manifests/ansible/aap-vault-auth-sa.yaml")
+  aap-platform = file("${path.module}/manifests/ansible/aap-platform.yaml")
 }
+
+
+# Ansible Automation Platform resource
+resource "kubernetes_manifest" "aap-controller" {
+  manifest = provider::kubernetes::manifest_decode(local.aap-platform)
+  field_manager {
+    force_conflicts = true
+  }
+}
+
 
 
 # import {
