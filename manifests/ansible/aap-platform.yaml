@@ -3,12 +3,8 @@ kind: AnsibleAutomationPlatform
 metadata:
   name: aap
   namespace: aap
-  # Platform
-  image_pull_policy: IfNotPresent
-  # Components
 spec:
   api:
-    disabled: false
   database:
       postgres_storage_class: ocs-storagecluster-cephfs
   controller:
