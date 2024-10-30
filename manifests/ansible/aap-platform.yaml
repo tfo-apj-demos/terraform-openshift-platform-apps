@@ -5,6 +5,7 @@ metadata:
   namespace: aap
 spec:
   api:
+  hostname: aap
   database:
       postgres_storage_class: ocs-storagecluster-cephfs
   controller:
