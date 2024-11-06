@@ -9,7 +9,7 @@ spec:
     overwrite: true
     name: aap-certificate
     type: kubernetes.io/tls
-  role: gcve
+  role: aap
   mount: pki
   commonName: aap-aap.apps.openshift-01.hashicorp.local
   format: pem_bundle
