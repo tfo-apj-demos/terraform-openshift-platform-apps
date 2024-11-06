@@ -4,7 +4,6 @@ metadata:
   name: aap
   namespace: aap
 spec:
-  hostname: aap
   api:
   #bundle_cacert_secret: aap-certificate
   route_host: aap-aap.apps.openshift-01.hashicorp.local
