@@ -4,7 +4,6 @@ metadata:
   name: aap
   namespace: aap
 spec:
-  api:
   hostname: aap
   bundle_cacert_secret: aap-certificate
   database:
