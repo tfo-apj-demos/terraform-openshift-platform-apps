@@ -1,0 +1,14 @@
+kind: VaultAuth
+apiVersion: secrets.hashicorp.com/v1beta1
+metadata:
+  name: vaultauth-aap
+  namespace: aap
+spec:
+  vaultConnectionRef: vaultconnection-gcve
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: aap
+    serviceAccount: vault-auth
+    audiences:
+      - vault

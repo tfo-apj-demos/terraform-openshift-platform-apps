@@ -1,0 +1,16 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultPKISecret
+metadata:
+  name: aapcert
+  namespace: aap
+spec:
+  destination:
+    create: true
+    overwrite: true
+    name: aap-certificate
+    type: kubernetes.io/tls
+  role: gcve
+  mount: pki
+  commonName: aap-aap.apps.openshift-01.hashicorp.local
+  format: pem_bundle
+  vaultAuthRef: vaultauth-tfe
