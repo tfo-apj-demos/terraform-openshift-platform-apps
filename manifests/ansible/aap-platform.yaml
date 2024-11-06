@@ -6,9 +6,11 @@ metadata:
 spec:
   hostname: aap
   api:
-  bundle_cacert_secret: aap-certificate
+  #bundle_cacert_secret: aap-certificate
+  route_host: aap-aap.apps.openshift-01.hashicorp.local
   route_tls_termination_mechanism: passthrough
   route_tls_secret: aap-certificate
+  no_log: false
   database:
       postgres_storage_class: ocs-storagecluster-cephfs
   controller:
