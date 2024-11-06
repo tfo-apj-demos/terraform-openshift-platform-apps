@@ -11,4 +11,4 @@ spec:
     role: aap
     serviceAccount: vault-auth
     audiences:
-      - vault
+      - https://kubernetes.default.svc
