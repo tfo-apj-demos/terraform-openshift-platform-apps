@@ -8,6 +8,7 @@ spec:
   api:
   bundle_cacert_secret: aap-certificate
   route_tls_termination_mechanism: passthrough
+  route_tls_secret: aap-certificate
   database:
       postgres_storage_class: ocs-storagecluster-cephfs
   controller:
