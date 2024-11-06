@@ -5,6 +5,7 @@ metadata:
   namespace: aap
 spec:
   hostname: aap
+  api:
   bundle_cacert_secret: aap-certificate
   database:
       postgres_storage_class: ocs-storagecluster-cephfs
