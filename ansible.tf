@@ -25,10 +25,10 @@ resource "kubernetes_manifest" "aap-pki" {
   manifest = provider::kubernetes::manifest_decode(local.aap-pki)
 }
 
-resource "kubernetes_manifest" "aap-pki" {
+resource "kubernetes_manifest" "aap-vaultauth" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vaultauth)
 }
 
-resource "kubernetes_manifest" "aap-pki" {
+resource "kubernetes_manifest" "aap-vaultconnection" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vaultconnection)
 }
