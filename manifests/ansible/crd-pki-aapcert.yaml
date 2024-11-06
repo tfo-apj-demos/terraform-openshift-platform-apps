@@ -13,4 +13,4 @@ spec:
   mount: pki
   commonName: aap-aap.apps.openshift-01.hashicorp.local
   format: pem_bundle
-  vaultAuthRef: vaultauth-tfe
+  vaultAuthRef: vaultauth-aap
