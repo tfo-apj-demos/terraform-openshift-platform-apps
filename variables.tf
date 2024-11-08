@@ -48,3 +48,9 @@ variable "awx_admin_password" {
   type        = string
   sensitive = true
 }
+
+variable "gitlab_runner_token" {
+  description = "The GitLab project runner token used to authenticate the runner with GitLab."
+  type        = string
+  sensitive   = true
+}
