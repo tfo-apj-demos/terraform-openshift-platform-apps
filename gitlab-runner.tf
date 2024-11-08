@@ -1,7 +1,7 @@
 resource "kubernetes_secret" "gitlab_runner_token" {
   metadata {
     name      = "gitlab-runner-secret"
-    namespace = "gitlab-runner" 
+    namespace = "gitlab-runner"
   }
 
   type = "Opaque"

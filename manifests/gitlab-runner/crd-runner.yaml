@@ -4,16 +4,7 @@ metadata:
   name: gitlab-runner
   namespace: gitlab-runner
 spec:
-  gitlabUrl: "https://gitlab.com"
+  gitlabUrl: "https://gitlab.com"  # Replace with your GitLab instance URL
   buildImage: "alpine"
+  token: gitlab-runner-secret
   tags: "openshift"
-  runners:
-    privileged: true
-  serviceAccountName: "gitlab-runner"  # Use a service account if needed
-
-  env:
-    - name: RUNNER_TOKEN
-      valueFrom:
-        secretKeyRef:
-          name: gitlab-runner-secret
-          key: runner-token
