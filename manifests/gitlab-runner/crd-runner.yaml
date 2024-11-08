@@ -1,0 +1,10 @@
+apiVersion: apps.gitlab.com/v1beta2
+kind: Runner
+metadata:
+  name: gitlab-runner
+  namespace: gitlab-runner
+spec:
+  gitlabUrl: https://gitlab.com  # Replace with your GitLab instance URL
+  buildImage: alpine
+  token: gitlab-runner-secret
+  tags: openshift
