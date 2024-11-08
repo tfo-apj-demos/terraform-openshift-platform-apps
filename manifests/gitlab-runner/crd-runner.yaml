@@ -6,5 +6,5 @@ metadata:
 spec:
   gitlabUrl: https://gitlab.com  # Replace with your GitLab instance URL
   buildImage: alpine
-  token: gitlab-runner-secret
+  runnerRegistrationToken: gitlab-runner-secret
   tags: openshift
