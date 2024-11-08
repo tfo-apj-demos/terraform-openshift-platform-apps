@@ -1,4 +1,4 @@
-variable "k8s_api_server" {
+variable "host" {
     type = string
     description = "The hostname (in form of URI) of the Kubernetes API"
 }
