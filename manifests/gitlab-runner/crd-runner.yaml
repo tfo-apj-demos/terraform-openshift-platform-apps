@@ -4,7 +4,17 @@ metadata:
   name: gitlab-runner
   namespace: gitlab-runner
 spec:
-  gitlabUrl: "https://gitlab.com"  # Replace with your GitLab instance URL
-  buildImage: "alpine"
+  gitlabUrl: https://gitlab.com
   token: gitlab-runner-secret
-  tags: "openshift"
+  concurrent: 10
+  checkInterval: 30
+  tags: openshift,kubernetes
+  cacheShared: true
+  cachePath: /cache
+  locked: false
+  buildImage: ubuntu:latest
+  protected: false
+  runUntagged: true
+  imagePullPolicy: IfNotPresent
+  serviceAccount: gitlab-runner
+  cacheType: s3
