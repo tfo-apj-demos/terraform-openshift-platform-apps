@@ -6,4 +6,4 @@ metadata:
 spec:
   gitlabUrl: https://gitlab.com
   token: gitlab-runner-secret
-  buildImage: ubuntu:latest
+  buildImage: ubuntu
