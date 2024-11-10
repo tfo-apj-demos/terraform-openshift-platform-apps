@@ -15,7 +15,7 @@ locals {
   gitlab_runner_manifest = file("${path.module}/manifests/gitlab-runner/crd-runner.yaml")
 }
 
-# resource "kubernetes_manifest" "gitlab_runner" {
-#   depends_on = [kubernetes_secret.gitlab_runner_token]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_runner_manifest)
-# }
+resource "kubernetes_manifest" "gitlab_runner" {
+  depends_on = [kubernetes_secret.gitlab_runner_token]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_runner_manifest)
+}
