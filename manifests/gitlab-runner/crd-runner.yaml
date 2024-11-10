@@ -6,15 +6,4 @@ metadata:
 spec:
   gitlabUrl: https://gitlab.com
   token: gitlab-runner-secret
-  concurrent: 10
-  checkInterval: 30
-  tags: openshift,kubernetes
-  cacheShared: true
-  cachePath: /cache
-  locked: false
-  buildImage: ubuntu:latest
-  protected: false
-  runUntagged: true
-  imagePullPolicy: IfNotPresent
-  serviceAccount: gitlab-runner
-  cacheType: s3
+  buildImage: alpine
