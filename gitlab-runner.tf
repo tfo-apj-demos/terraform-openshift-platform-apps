@@ -7,7 +7,7 @@ resource "kubernetes_secret" "gitlab_runner_token" {
   type = "Opaque"
 
   data = {
-    "runner-token" = base64encode(var.gitlab_runner_token)
+    "runner-token" = var.gitlab_runner_token
   }
 }
 
