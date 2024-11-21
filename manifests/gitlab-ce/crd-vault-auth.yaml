@@ -1,0 +1,14 @@
+kind: VaultAuth
+apiVersion: secrets.hashicorp.com/v1beta1
+metadata:
+  name: vaultauth-gitlab
+  namespace: gitlab
+spec:
+  vaultConnectionRef: vaultconnection-gcve
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: gitlab
+    serviceAccount: vault-auth
+    audiences:
+      - https://kubernetes.default.svc
