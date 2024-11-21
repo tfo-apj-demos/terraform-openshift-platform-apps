@@ -39,3 +39,13 @@ resource "kubernetes_manifest" "gitlab_pvc_logs" {
   depends_on = [kubernetes_namespace.gitlab]
   manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_logs)
 }
+
+resource "kubernetes_manifest" "gitlab_route" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_route)
+}
+
+resource "kubernetes_manifest" "gitlab_service" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_service)
+}
