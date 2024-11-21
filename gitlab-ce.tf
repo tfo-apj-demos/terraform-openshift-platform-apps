@@ -11,6 +11,9 @@ locals {
   gitlab_crd_vaultconnection = file("${path.module}/manifests/gitlab-ce/crd-vault-connection.yaml")
   gitlab_pki-cert = file("${path.module}/manifests/gitlab-ce/crd-pki-gitlabcert.yaml")
 
+  #Gitlab Vault Service Account
+  gitlab_vault_sa = file("${path.module}//manifests/gitlab-ce/crd-vault-auth-sa.yaml")
+
 }
 
 resource "kubernetes_namespace" "gitlab" {
@@ -76,3 +79,11 @@ resource "kubernetes_manifest" "gitlab_pki-cert" {
   depends_on = [kubernetes_namespace.gitlab]
   manifest   = provider::kubernetes::manifest_decode(local.gitlab_pki-cert)
 }
+
+# vault sa kubernetes_manifest
+resource "kubernetes_manifest" "gitlab_vault_sa" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest = provider::kubernetes::manifest_decode(local.gitlab_vault_sa)
+}
+
+
