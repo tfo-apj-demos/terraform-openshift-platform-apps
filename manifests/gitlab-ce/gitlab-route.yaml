@@ -5,6 +5,7 @@ metadata:
   name: gitlab-route
   namespace: gitlab
 spec:
+  host: gitlab.hashicorp.local
   to:
     kind: Service
     name: gitlab-ce
