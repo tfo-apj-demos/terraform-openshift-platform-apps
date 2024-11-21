@@ -2,7 +2,8 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: gitlab-ce
+  name: gitlab-route
+  namespace: gitlab
 spec:
   to:
     kind: Service

@@ -3,6 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: gitlab-config-pvc
+  namespace: gitlab
 spec:
   accessModes:
   - ReadWriteOnce
