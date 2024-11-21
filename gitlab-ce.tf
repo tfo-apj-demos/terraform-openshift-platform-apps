@@ -12,7 +12,7 @@ locals {
   gitlab_pki-cert = file("${path.module}/manifests/gitlab-ce/crd-pki-gitlabcert.yaml")
 
   #Gitlab Vault Service Account
-  gitlab_vault_sa = file("${path.module}//manifests/gitlab-ce/crd-vault-auth-sa.yaml")
+  gitlab_vault_sa = file("${path.module}/manifests/gitlab-ce/crd-vault-auth-sa.yaml")
 
 }
 
