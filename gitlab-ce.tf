@@ -58,3 +58,21 @@ resource "kubernetes_manifest" "gitlab_service" {
   depends_on = [kubernetes_namespace.gitlab]
   manifest   = provider::kubernetes::manifest_decode(local.gitlab_service)
 }
+
+
+#vault resources
+
+resource "kubernetes_manifest" "gitlab_crd_vaultauth" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_crd_vaultauth)
+}
+
+resource "kubernetes_manifest" "gitlab_crd_vaultconnection" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_crd_vaultconnection)
+}
+
+resource "kubernetes_manifest" "gitlab_pki-cert" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_pki-cert)
+}
