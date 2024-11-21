@@ -24,3 +24,18 @@ resource "kubernetes_manifest" "gitlab_deployment" {
   depends_on = [kubernetes_namespace.gitlab]
   manifest   = provider::kubernetes::manifest_decode(local.gitlab_deployment)
 }
+
+resource "kubernetes_manifest" "gitlab_pvc_config" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_config)
+}
+
+resource "kubernetes_manifest" "gitlab_pvc_data" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_data)
+}
+
+resource "kubernetes_manifest" "gitlab_pvc_logs" {
+  depends_on = [kubernetes_namespace.gitlab]
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_logs)
+}
