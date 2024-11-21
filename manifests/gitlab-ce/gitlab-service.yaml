@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-ce
+spec:
+  selector:
+    app: gitlab-ce
+  ports:
+  - port: 443
+    targetPort: 443
+    name: https
+  - port: 22
+    targetPort: 22
+    name: ssh
