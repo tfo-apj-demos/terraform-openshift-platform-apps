@@ -18,12 +18,9 @@ runAsUser:
   type: MustRunAs
   uid: 1000
 seLinuxContext:
-  type: MustRunAs
+  type: RunAsAny
 fsGroup:
-  type: MustRunAs
-  ranges:
-    - min: 1000
-      max: 1000
+  type: RunAsAny
 supplementalGroups:
   type: RunAsAny
 users:
