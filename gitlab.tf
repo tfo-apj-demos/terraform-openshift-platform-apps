@@ -1,63 +1,28 @@
 locals {
 
+    gitlab_crd = file("${path.module}/manifests/gitlab/crd-gitlab.yaml")
+    gitlab_route = file("${path.module}/manifests/gitlab/gitlab-route.yaml")
 }
 
-# resource "kubernetes_namespace" "gitlab" {
-#   metadata {
-#     name = "gitlab"
-#   }
 
-#     lifecycle {
-    
-#     ignore_changes = [
-#         metadata.0.annotations["openshift.io/sa.scc.mcs"],
-#         metadata.0.annotations["openshift.io/sa.scc.supplemental-groups"],
-#         metadata.0.annotations["openshift.io/sa.scc.uid-range"],
-#     ]
-#     }
-  
-# }
 
-# resource "kubernetes_manifest" "gitlab_scc" {
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_scc)
-# }
+resource "kubernetes_manifest" "gitlab_crd" {
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_crd)
+}
 
-# resource "kubernetes_manifest" "gitlab_sa" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_sa)
-# }
+resource "kubernetes_manifest" "gitlab_route" {
+  manifest   = provider::kubernetes::manifest_decode(local.gitlab_route)
+}
 
 
 
-# resource "kubernetes_manifest" "gitlab_deployment" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_deployment)
-# }
 
-# resource "kubernetes_manifest" "gitlab_pvc_config" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_config)
-# }
 
-# resource "kubernetes_manifest" "gitlab_pvc_data" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_data)
-# }
 
-# resource "kubernetes_manifest" "gitlab_pvc_logs" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_pvc_logs)
-# }
 
-# resource "kubernetes_manifest" "gitlab_route" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_route)
-# }
 
-# resource "kubernetes_manifest" "gitlab_service" {
-#   depends_on = [kubernetes_namespace.gitlab]
-#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_service)
-# }
+
+
 
 
 # #vault resources
