@@ -8,9 +8,6 @@ allowHostNetwork: false
 allowHostPID: false
 allowHostIPC: false
 readOnlyRootFilesystem: false
-requiredDropCapabilities:
-- KILL
-- MKNOD
 allowedCapabilities:
 - SETUID
 - SETGID
