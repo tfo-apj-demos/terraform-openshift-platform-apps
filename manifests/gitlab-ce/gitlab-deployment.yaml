@@ -16,9 +16,16 @@ spec:
       labels:
         app: gitlab-ce
     spec:
+      serviceAccountName: gitlab-sa
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: gitlab-ce
         image: gitlab/gitlab-ce:latest
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          allowPrivilegeEscalation: true
         ports:
         - containerPort: 443
           name: https

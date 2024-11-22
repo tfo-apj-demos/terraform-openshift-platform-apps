@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: SecurityContextConstraints
+metadata:
+  name: gitlab-scc
+allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+- KILL
+- MKNOD
+allowedCapabilities:
+- SETUID
+- SETGID
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: MustRunAs
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+- system:serviceaccount:your-project:gitlab-sa
