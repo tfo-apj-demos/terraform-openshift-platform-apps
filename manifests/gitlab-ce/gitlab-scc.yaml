@@ -23,4 +23,4 @@ fsGroup:
 supplementalGroups:
   type: RunAsAny
 users:
-- system:serviceaccount:your-project:gitlab-sa
+- system:serviceaccount:gitlab:gitlab-sa
