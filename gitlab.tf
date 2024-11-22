@@ -19,21 +19,21 @@ locals {
 
 }
 
-resource "kubernetes_namespace" "gitlab" {
-  metadata {
-    name = "gitlab"
-  }
+# resource "kubernetes_namespace" "gitlab" {
+#   metadata {
+#     name = "gitlab"
+#   }
 
-    lifecycle {
+#     lifecycle {
     
-    ignore_changes = [
-        metadata.0.annotations["openshift.io/sa.scc.mcs"],
-        metadata.0.annotations["openshift.io/sa.scc.supplemental-groups"],
-        metadata.0.annotations["openshift.io/sa.scc.uid-range"],
-    ]
-    }
+#     ignore_changes = [
+#         metadata.0.annotations["openshift.io/sa.scc.mcs"],
+#         metadata.0.annotations["openshift.io/sa.scc.supplemental-groups"],
+#         metadata.0.annotations["openshift.io/sa.scc.uid-range"],
+#     ]
+#     }
   
-}
+# }
 
 # resource "kubernetes_manifest" "gitlab_scc" {
 #   manifest   = provider::kubernetes::manifest_decode(local.gitlab_scc)
