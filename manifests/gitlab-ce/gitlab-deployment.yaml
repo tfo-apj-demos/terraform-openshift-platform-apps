@@ -51,11 +51,7 @@ spec:
         - name: GITLAB_OMNIBUS_CONFIG
           value: |
             external_url 'https://gitlab.hashicorp.local'
-            nginx['ssl_certificate'] = "/etc/gitlab/ssl/gitlab.example.com.crt"
-            nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/gitlab.example.com.key"
-            nginx['redirect_http_to_https'] = true
             gitlab_rails['initial_root_password'] = 'Hashicorp123!'
-            gitlab_rails['backup_keep_time'] = 604800
       volumes:
       - name: gitlab-config
         persistentVolumeClaim:
