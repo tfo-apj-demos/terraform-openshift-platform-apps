@@ -1,21 +1,4 @@
 locals {
-  gitlab_deployment = file("${path.module}/manifests/gitlab-ce/gitlab-deployment.yaml")
-  gitlab_service = file("${path.module}/manifests/gitlab-ce/gitlab-service.yaml")
-  gitlab_pvc_logs = file("${path.module}/manifests/gitlab-ce/gitlab-pvc-logs.yaml")
-  gitlab_pvc_data = file("${path.module}/manifests/gitlab-ce/gitlab-pvc-data.yaml")
-  gitlab_pvc_config = file("${path.module}/manifests/gitlab-ce/gitlab-pvc-config.yaml")
-  gitlab_route = file("${path.module}/manifests/gitlab-ce/gitlab-route.yaml")
-
-  #Gitlab Vault Resources for certificate
-  gitlab_crd_vaultauth = file("${path.module}/manifests/gitlab-ce/crd-vault-auth.yaml")
-  gitlab_crd_vaultconnection = file("${path.module}/manifests/gitlab-ce/crd-vault-connection.yaml")
-  gitlab_pki-cert = file("${path.module}/manifests/gitlab-ce/crd-pki-gitlabcert.yaml")
-
-  gitlab_sa = file("${path.module}/manifests/gitlab-ce/gitlab-sa.yaml")
-  gitlab_scc = file("${path.module}/manifests/gitlab-ce/gitlab-scc.yaml")
-
-  #Gitlab Vault Service Account
-  gitlab_vault_sa = file("${path.module}/manifests/gitlab-ce/crd-vault-auth-sa.yaml")
 
 }
 
