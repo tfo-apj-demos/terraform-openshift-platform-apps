@@ -15,11 +15,13 @@ allowedCapabilities:
 - SETUID
 - SETGID
 runAsUser:
-  type: RunAsAny
+  type: MustRunAs
+  uid: 1000
 seLinuxContext:
   type: MustRunAs
-# fsGroup:
-#   type: RunAsAny
+fsGroup:
+  type: MustRunAs
+  uid: 1000
 supplementalGroups:
   type: RunAsAny
 users:
