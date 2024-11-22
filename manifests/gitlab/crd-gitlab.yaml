@@ -1,0 +1,19 @@
+apiVersion: apps.gitlab.com/v1beta1
+kind: GitLab
+metadata:
+  name: gitlab
+  namespace: gitlab
+spec:
+  chart:
+    values:
+      certmanager:
+        install: true
+      global:
+        hosts:
+          domain: gitlab.hashicorp.local
+        ingress:
+          configureCertmanager: true
+      postgresql:
+        primary:
+          extendedConfiguration: max_connections = 200
+    version: 8.6.0
