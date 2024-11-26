@@ -6,13 +6,13 @@ locals {
 
 
 
-resource "kubernetes_manifest" "gitlab_crd" {
-  manifest   = provider::kubernetes::manifest_decode(local.gitlab_crd)
-}
+# resource "kubernetes_manifest" "gitlab_crd" {
+#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_crd)
+# }
 
-resource "kubernetes_manifest" "gitlab_route" {
-  manifest   = provider::kubernetes::manifest_decode(local.gitlab_route)
-}
+# resource "kubernetes_manifest" "gitlab_route" {
+#   manifest   = provider::kubernetes::manifest_decode(local.gitlab_route)
+# }
 
 
 
