@@ -9,6 +9,9 @@ spec:
     overwrite: true
     name: tfe-certificate
     type: kubernetes.io/tls
+  rolloutRestartTargets:
+    - kind: Deployment
+      name: terraform-enterprise
   role: gcve
   mount: pki
   commonName: tfe.hashicorp.local
