@@ -12,5 +12,6 @@ spec:
   role: gcve
   mount: pki
   commonName: tfe.hashicorp.local
+  ttl: 2190h
   format: pem_bundle
   vaultAuthRef: vaultauth-tfe
