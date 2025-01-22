@@ -35,3 +35,4 @@ env:
     # add image with Vault CA trust
     TFE_RUN_PIPELINE_IMAGE: srlynch1/tfc-agent:latest
     TFE_RUN_PIPELINE_KUBERNETES_OPEN_SHIFT_ENABLED: true
+    TFE_RUN_PIPELINE_KUBERNETES_DEBUG_ENABLED: true
