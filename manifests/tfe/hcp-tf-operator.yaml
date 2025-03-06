@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: tfc-agent
-          image: "slrynch1/tfc-agent:latest"
+          image: "srlynch1/tfc-agent:latest"
           resources:
             requests:
               memory: "1024Mi"
