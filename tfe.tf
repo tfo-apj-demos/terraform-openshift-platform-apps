@@ -35,4 +35,7 @@ resource "kubernetes_manifest" "tfe_route" {
 # deploy hcp-tf-operator crd  
 resource "kubernetes_manifest" "tfe_operator" {
   manifest = provider::kubernetes::manifest_decode(local.hcp_tf_operator)
+  field_manager {
+    force_conflicts = true
+  }
 }
