@@ -5,6 +5,7 @@ import {
 
 locals {
   tfe_route = file("${path.module}/manifests/tfe/tfe-route.yaml")
+  hcp_tf_operator = file("${path.module}/manifests/tfe/hcp-tf-operator.yaml")
 }
 
 
@@ -28,4 +29,10 @@ resource "helm_release" "tfe" {
 # Openshift Route for TFE
 resource "kubernetes_manifest" "tfe_route" {
   manifest = provider::kubernetes::manifest_decode(local.tfe_route)
+}
+
+
+# deploy hcp-tf-operator crd  
+resource "kubernetes_manifest" "tfe_operator" {
+  manifest = provider::kubernetes::manifest_decode(local.hcp_tf_operator)
 }

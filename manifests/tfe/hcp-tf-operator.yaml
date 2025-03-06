@@ -1,15 +1,15 @@
 apiVersion: app.terraform.io/v1alpha2
 kind: AgentPool
 metadata:
-  name: agentpoolaws
-  namespace: tfe-agents
+  name: agentpooltest
+  namespace: tfe
 spec:
   organization: gcve
   token:
     secretKeyRef:
       name: hcp-terraform-operator
       key: token
-  name: agentpoolaws
+  name: agentpooltest
   agentTokens:
     - name: white
     - name: blue
