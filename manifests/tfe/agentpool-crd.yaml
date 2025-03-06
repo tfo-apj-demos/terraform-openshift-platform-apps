@@ -1,0 +1,31 @@
+apiVersion: app.terraform.io/v1alpha2
+kind: AgentPool
+metadata:
+  name: agentpoolaws
+  namespace: tfe-agents
+spec:
+  organization: gcve
+  token:
+    secretKeyRef:
+      name: hcp-terraform-operator
+      key: token
+  name: agentpoolaws
+  agentTokens:
+    - name: white
+    - name: blue
+    - name: red
+    - name: yellow
+    - name: green
+  agentDeployment:
+    replicas: 0
+    spec:
+      containers:
+        - name: tfc-agent
+          image: "slrynch1/tfc-agent:latest"
+          resources:
+            requests:
+              memory: "1024Mi"
+  autoscaling:
+    minReplicas: 2
+    maxReplicas: 20
+    cooldownPeriodSeconds: 60
