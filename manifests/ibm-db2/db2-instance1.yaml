@@ -1,0 +1,66 @@
+kind: Db2uInstance
+apiVersion: db2u.databases.ibm.com/v1
+metadata:
+  name: db2uinstance-sample
+  namespace: db2
+spec:
+  account:
+    securityConfig:
+      privilegedSysctlInit: true
+  environment:
+    databases:
+      - name: BLUDB
+    dbType: db2wh
+    partitionConfig:
+      total: 2
+      volumePerPartition: true
+  license:
+    accept: false
+  nodes: 1
+  storage:
+    - name: meta
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: ocs-storagecluster-cephfs
+      type: create
+    - name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: ocs-storagecluster-ceph-rbd
+      type: template
+    - name: backup
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: ocs-storagecluster-cephfs
+      type: create
+    - name: tempts
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: ocs-storagecluster-ceph-rbd
+      type: template
+    - name: archivelogs
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 25Gi
+        storageClassName: ocs-storagecluster-cephfs
+      type: create
+  version: s12.1.1.0-cn1
