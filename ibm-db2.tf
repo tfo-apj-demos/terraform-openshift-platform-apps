@@ -1,5 +1,5 @@
 locals {
-  db2_instance = file("${path.module}/manifests/ibm-db2/db2-instance.yaml")
+  db2_instance = file("${path.module}/manifests/ibm-db2/db2-instance1.yaml")
 }
 
 resource "kubernetes_manifest" "db2" {
