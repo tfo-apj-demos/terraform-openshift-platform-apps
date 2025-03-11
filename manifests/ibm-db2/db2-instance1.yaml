@@ -15,7 +15,7 @@ spec:
       total: 2
       volumePerPartition: true
   license:
-    accept: false
+    accept: true
   nodes: 1
   storage:
     - name: meta
