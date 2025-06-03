@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vault-secrets-web-demo
-  namespace: vault-secrets-web-demo
+  name: vault-live-secrets-demo
+  namespace: vault-live-secrets-demo
   labels:
-    app: vault-secrets-web-demo
+    app: vault-live-secrets-demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vault-secrets-web-demo
+      app: vault-live-secrets-demo
   template:
     metadata:
       labels:
-        app: vault-secrets-web-demo
+        app: vault-live-secrets-demo
     spec:
       containers:
       - name: vault-secrets-web-demo
