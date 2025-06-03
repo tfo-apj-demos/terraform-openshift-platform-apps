@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: vault-secrets-web-demo
-        image: quay.io/your-org/vault-secrets-web-demo:latest
+        image: quay.io/aaroneautomate/vault-secrets-web-demo:latest
         ports:
         - containerPort: 3000
         env:
