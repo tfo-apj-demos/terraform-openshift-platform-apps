@@ -1,14 +1,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: vault-secrets-web-demo
-  namespace: vault-secrets-web-demo
+  name: vault-live-secrets-demo
+  namespace: vault-live-secrets-demo
   labels:
-    app: vault-secrets-web-demo
+    app: vault-live-secrets-demo
 spec:
   to:
     kind: Service
-    name: vault-secrets-web-demo
+    name: vault-live-secrets-demo
     weight: 100
   port:
     targetPort: http
