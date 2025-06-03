@@ -2,7 +2,7 @@ apiVersion: secrets.hashicorp.com/v1beta1
 kind: VaultConnection
 metadata:
   name: vaultconnection-gcve
-  namespace: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
 spec:
   skipTLSVerify: true
   address: 'https://vault.hashicorp.local:8200'
