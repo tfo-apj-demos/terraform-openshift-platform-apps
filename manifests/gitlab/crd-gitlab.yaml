@@ -8,6 +8,8 @@ spec:
     values:
       certmanager:
         install: true
+      nginx-ingress:
+        enabled: false
       global:
         hosts:
           domain: gitlab.hashicorp.local
