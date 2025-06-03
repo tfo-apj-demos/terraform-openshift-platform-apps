@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-secrets-web-demo
+  namespace: vault-secrets-web-demo
+  labels:
+    app: vault-secrets-web-demo
+spec:
+  selector:
+    app: vault-secrets-web-demo
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+  type: ClusterIP

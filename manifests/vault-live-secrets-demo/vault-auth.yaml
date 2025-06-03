@@ -1,0 +1,14 @@
+kind: VaultAuth
+apiVersion: secrets.hashicorp.com/v1beta1
+metadata:
+  name: vaultauth-vault-secrets-web-demo
+  namespace: vault-secrets-web-demo
+spec:
+  vaultConnectionRef: vaultconnection-gcve
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: vault-secrets-web-demo
+    serviceAccount: vault-auth
+    audiences:
+      - https://kubernetes.default.svc
