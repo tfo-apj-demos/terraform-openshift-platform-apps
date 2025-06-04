@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: vault-secrets-web-demo
+subjects:
+- kind: ServiceAccount
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo

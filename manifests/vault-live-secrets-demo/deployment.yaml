@@ -15,6 +15,7 @@ spec:
       labels:
         app: vault-live-secrets-demo
     spec:
+      serviceAccountName: vault-secrets-web-demo
       containers:
       - name: vault-secrets-web-demo
         image: quay.io/aaroneautomate/vault-secrets-web-demo:latest
@@ -27,6 +28,10 @@ spec:
           value: "3000"
         - name: SECRETS_DIR
           value: "/secrets"
+        - name: K8S_NAMESPACE
+          value: "vault-live-secrets-demo"
+        - name: K8S_SECRET_NAME
+          value: "vault-web-secrets"
         volumeMounts:
         - name: vault-secrets
           mountPath: /secrets

@@ -8,6 +8,7 @@ locals {
   vault-live-secrets-demo-vault-auth-crb = file("${path.module}/manifests/vault-live-secrets-demo/vault-auth-clusterrolebinding.yaml")
   vault-live-secrets-demo-vault-auth = file("${path.module}/manifests/vault-live-secrets-demo/vault-auth.yaml")
   vault-live-secrets-demo-vault-static-secret = file("${path.module}/manifests/vault-live-secrets-demo/vault-static-secret.yaml")
+  vault-live-secrets-demo-rbac = file("${path.module}/manifests/vault-live-secrets-demo/rbac.yaml")
 }
 
 resource "kubernetes_namespace" "vault-live-secrets-demo" {
@@ -57,9 +58,18 @@ resource "kubernetes_manifest" "vault-live-secrets-demo-vault-static-secret" {
   manifest = provider::kubernetes::manifest_decode(local.vault-live-secrets-demo-vault-static-secret)
 }
 
+# RBAC for kubectl secret monitoring
+resource "kubernetes_manifest" "vault-live-secrets-demo-rbac" {
+  depends_on = [kubernetes_namespace.vault-live-secrets-demo]
+  manifest = provider::kubernetes::manifest_decode(local.vault-live-secrets-demo-rbac)
+}
+
 # Application Deployment
 resource "kubernetes_manifest" "vault-live-secrets-demo-deployment" {
-  depends_on = [kubernetes_manifest.vault-live-secrets-demo-vault-static-secret]
+  depends_on = [
+    kubernetes_manifest.vault-live-secrets-demo-vault-static-secret,
+    kubernetes_manifest.vault-live-secrets-demo-rbac
+  ]
   manifest = provider::kubernetes::manifest_decode(local.vault-live-secrets-demo-deployment)
   field_manager {
     force_conflicts = true
