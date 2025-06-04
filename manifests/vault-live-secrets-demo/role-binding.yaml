@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: vault-secrets-web-demo
+subjects:
+- kind: ServiceAccount
+  name: vault-secrets-web-demo
+  namespace: vault-live-secrets-demo
