@@ -4,7 +4,7 @@ locals {
     tfe_replica_count       = 1
     tfe_image_repository_url = "images.releases.hashicorp.com"
     tfe_image_name           = "hashicorp/terraform-enterprise"
-    tfe_image_tag            = "v202504-1"
+    tfe_image_tag            = "1.0.1"
     
 
     # TFE config settings
