@@ -9,11 +9,14 @@ locals {
   langfuse_pki_cert         = file("${path.module}/manifests/langfuse/crd-pki-langfusecert.yaml")
 
   langfuse_helm_values = templatefile("${path.module}/templates/langfuse_helm_values.yaml.tpl", {
-    hostname      = "langfuse.apps.openshift-01.hashicorp.local"
-    storage_class = "ocs-storagecluster-cephfs"
-    s3_endpoint   = "http://rook-ceph-rgw-ocs-storagecluster-cephobjectstore.openshift-storage.svc"
-    s3_bucket     = data.kubernetes_resource.langfuse_s3.object.spec.bucketName
-    s3_access_key = data.kubernetes_secret.langfuse_s3.data.AWS_ACCESS_KEY_ID
+    hostname            = "langfuse.apps.openshift-01.hashicorp.local"
+    storage_class       = "ocs-storagecluster-cephfs"
+    s3_endpoint         = "http://rook-ceph-rgw-ocs-storagecluster-cephobjectstore.openshift-storage.svc"
+    s3_bucket           = data.kubernetes_resource.langfuse_s3.object.spec.bucketName
+    s3_access_key       = data.kubernetes_secret.langfuse_s3.data.AWS_ACCESS_KEY_ID
+    postgres_password   = var.langfuse_postgres_password
+    clickhouse_password = var.langfuse_clickhouse_password
+    redis_password      = var.langfuse_redis_password
   })
 }
 

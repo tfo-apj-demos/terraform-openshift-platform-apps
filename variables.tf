@@ -74,3 +74,21 @@ variable "langfuse_encryption_key" {
   sensitive   = true
   default     = ""
 }
+
+variable "langfuse_postgres_password" {
+  description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "langfuse_clickhouse_password" {
+  description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "langfuse_redis_password" {
+  description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}

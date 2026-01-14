@@ -59,6 +59,7 @@ postgresql:
   auth:
     username: langfuse
     database: langfuse
+    password: "${postgres_password}"
   primary:
     persistence:
       storageClass: "${storage_class}"
@@ -76,6 +77,7 @@ clickhouse:
   deploy: true
   auth:
     username: default
+    password: "${clickhouse_password}"
   persistence:
     storageClass: "${storage_class}"
     size: 20Gi
@@ -104,6 +106,7 @@ redis:
   architecture: standalone
   auth:
     enabled: true
+    password: "${redis_password}"
   primary:
     persistence:
       storageClass: "${storage_class}"
