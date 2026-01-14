@@ -27,6 +27,7 @@ This repo works in conjunction with `terraform-openshift-config`:
 | **Red Hat Developer Hub** | Backstage CRD instance |
 | **IBM DB2** | Db2uCluster CRD instance |
 | **Keycloak** | Keycloak CRD instance |
+| **Langfuse** | Helm release (PostgreSQL, ClickHouse, Redis), S3 bucket claim, OpenShift route |
 | **Vault Live Secrets Demo** | Full application stack (Deployment, Service, Route, Vault integration) |
 
 ## Deployment Patterns Used
@@ -76,5 +77,10 @@ module "openshift_platform_apps" {
   tfe_encryption_password = var.tfe_encryption_password
   awx_admin_password      = var.awx_admin_password
   gitlab_runner_token     = var.gitlab_runner_token
+  
+  # Langfuse secrets (generate with: openssl rand -hex 32)
+  langfuse_nextauth_secret = var.langfuse_nextauth_secret
+  langfuse_salt            = var.langfuse_salt
+  langfuse_encryption_key  = var.langfuse_encryption_key
 }
 ```

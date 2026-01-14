@@ -1,0 +1,9 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  name: vault-connection
+  namespace: langfuse
+spec:
+  address: https://vault.hashicorp.local:8200
+  caCertSecretRef: vault-ca-cert
+  skipTLSVerify: false

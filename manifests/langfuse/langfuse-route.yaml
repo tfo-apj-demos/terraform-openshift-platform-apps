@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: langfuse
+  namespace: langfuse
+  annotations:
+    haproxy.router.openshift.io/timeout: 300s
+spec:
+  host: langfuse.apps.openshift-01.hashicorp.local
+  port:
+    targetPort: 3000
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: langfuse-web
+    weight: 100
+  wildcardPolicy: None

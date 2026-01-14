@@ -1,0 +1,19 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultPKISecret
+metadata:
+  name: langfuse-certificate
+  namespace: langfuse
+spec:
+  vaultAuthRef: vault-auth
+  mount: pki
+  role: openshift-apps
+  commonName: langfuse.apps.openshift-01.hashicorp.local
+  altNames:
+    - langfuse.apps.openshift-01.hashicorp.local
+    - langfuse-web.langfuse.svc.cluster.local
+  ttl: 720h
+  format: pem
+  destination:
+    name: langfuse-certificate
+    create: true
+    type: kubernetes.io/tls
