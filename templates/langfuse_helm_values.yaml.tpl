@@ -60,7 +60,7 @@ postgresql:
   primary:
     persistence:
       storageClass: "${storage_class}"
-      size: 50Gi
+      size: 10Gi
     resources:
       requests:
         cpu: "1"
