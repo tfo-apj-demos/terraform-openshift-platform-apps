@@ -27,14 +27,11 @@ langfuse:
       name: langfuse-secrets
       key: LANGFUSE_ENCRYPTION_KEY
 
-  # Resource sizing for demo/development
+  # Resource sizing
   resources:
     requests:
       cpu: "500m"
       memory: "1Gi"
-    limits:
-      cpu: "1"
-      memory: "2Gi"
 
   # OpenShift ingress disabled - we use Route instead
   ingress:
@@ -63,14 +60,11 @@ postgresql:
   primary:
     persistence:
       storageClass: "${storage_class}"
-      size: 10Gi
+      size: 50Gi
     resources:
       requests:
-        cpu: "250m"
-        memory: "512Mi"
-      limits:
-        cpu: "500m"
-        memory: "1Gi"
+        cpu: "1"
+        memory: "2Gi"
 
 # Use bundled ClickHouse for analytics
 clickhouse:
@@ -85,9 +79,6 @@ clickhouse:
     requests:
       cpu: "500m"
       memory: "2Gi"
-    limits:
-      cpu: "1"
-      memory: "4Gi"
   zookeeper:
     persistence:
       storageClass: "${storage_class}"
@@ -96,9 +87,6 @@ clickhouse:
       requests:
         cpu: "250m"
         memory: "512Mi"
-      limits:
-        cpu: "500m"
-        memory: "1Gi"
 
 # Use bundled Redis for caching
 redis:
@@ -115,9 +103,6 @@ redis:
       requests:
         cpu: "100m"
         memory: "256Mi"
-      limits:
-        cpu: "500m"
-        memory: "512Mi"
 
 # Use external S3 (Ceph RGW from OpenShift Data Foundation)
 s3:
