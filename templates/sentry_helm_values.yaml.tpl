@@ -167,17 +167,21 @@ vroom:
       cpu: "500m"
       memory: "1Gi"
 
-# External PostgreSQL (via Crunchy Postgres Operator)
+# Bundled PostgreSQL configuration
 postgresql:
-  enabled: false
-
-externalPostgresql:
-  host: "${postgres_host}"
-  port: ${postgres_port}
-  username: "${postgres_username}"
-  password: "${postgres_password}"
-  database: "${postgres_database}"
-  sslMode: "require"
+  enabled: true
+  auth:
+    username: sentry
+    database: sentry
+    password: "${postgres_password}"
+  primary:
+    persistence:
+      storageClass: "${storage_class}"
+      size: 50Gi
+    resources:
+      requests:
+        cpu: "1"
+        memory: "2Gi"
 
 # Bundled Redis configuration (caching and rate limiting)
 redis:

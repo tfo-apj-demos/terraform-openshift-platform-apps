@@ -112,6 +112,12 @@ variable "sentry_admin_password" {
   sensitive   = true
 }
 
+variable "sentry_postgres_password" {
+  description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
 variable "sentry_redis_password" {
   description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
   type        = string
