@@ -92,3 +92,65 @@ variable "langfuse_redis_password" {
   type        = string
   sensitive   = true
 }
+
+# Sentry Configuration
+variable "sentry_secret_key" {
+  description = "Secret key for Sentry encryption. Generate with: openssl rand -hex 32"
+  type        = string
+  sensitive   = true
+}
+
+variable "sentry_admin_email" {
+  description = "Email address for the Sentry admin user"
+  type        = string
+  default     = "admin@example.com"
+}
+
+variable "sentry_admin_password" {
+  description = "Password for the Sentry admin user. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "sentry_redis_password" {
+  description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "sentry_clickhouse_password" {
+  description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "sentry_kafka_password" {
+  description = "Password for the bundled Kafka. Generate with: openssl rand -base64 24"
+  type        = string
+  sensitive   = true
+}
+
+variable "sentry_mail_host" {
+  description = "SMTP mail server host for Sentry notifications"
+  type        = string
+  default     = ""
+}
+
+variable "sentry_mail_port" {
+  description = "SMTP mail server port"
+  type        = number
+  default     = 587
+}
+
+variable "sentry_mail_username" {
+  description = "SMTP mail server username"
+  type        = string
+  default     = ""
+}
+
+variable "sentry_mail_password" {
+  description = "SMTP mail server password"
+  type        = string
+  sensitive   = true
+  default     = ""
+}
