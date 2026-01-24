@@ -90,12 +90,63 @@ resource "kubernetes_secret" "sentry_secrets" {
   }
 }
 
+# OpenShift SCC - Grant anyuid to default SA for stateful services
+# ClickHouse, PostgreSQL, Redis, Kafka, Zookeeper need to run as specific UIDs
+resource "kubernetes_manifest" "sentry_anyuid_scc" {
+  depends_on = [kubernetes_namespace.sentry]
+  manifest = {
+    apiVersion = "rbac.authorization.k8s.io/v1"
+    kind       = "ClusterRoleBinding"
+    metadata = {
+      name = "sentry-anyuid-scc"
+    }
+    roleRef = {
+      apiGroup = "rbac.authorization.k8s.io"
+      kind     = "ClusterRole"
+      name     = "system:openshift:scc:anyuid"
+    }
+    subjects = [
+      {
+        kind      = "ServiceAccount"
+        name      = "default"
+        namespace = "sentry"
+      },
+      {
+        kind      = "ServiceAccount"
+        name      = "sentry-clickhouse"
+        namespace = "sentry"
+      },
+      {
+        kind      = "ServiceAccount"
+        name      = "sentry-postgresql"
+        namespace = "sentry"
+      },
+      {
+        kind      = "ServiceAccount"
+        name      = "sentry-redis"
+        namespace = "sentry"
+      },
+      {
+        kind      = "ServiceAccount"
+        name      = "sentry-kafka"
+        namespace = "sentry"
+      },
+      {
+        kind      = "ServiceAccount"
+        name      = "sentry-zookeeper"
+        namespace = "sentry"
+      }
+    ]
+  }
+}
+
 # Helm release for Sentry
 resource "helm_release" "sentry" {
   depends_on = [
     kubernetes_namespace.sentry,
     kubernetes_manifest.sentry_s3_bucket,
     kubernetes_secret.sentry_secrets,
+    kubernetes_manifest.sentry_anyuid_scc,
     data.kubernetes_secret.sentry_s3,
     data.kubernetes_resource.sentry_s3
   ]

@@ -182,11 +182,6 @@ postgresql:
       requests:
         cpu: "1"
         memory: "2Gi"
-  # OpenShift compatibility
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: false
 
 # Bundled Redis configuration (caching and rate limiting)
 redis:
@@ -204,11 +199,6 @@ redis:
         memory: "1Gi"
   replica:
     replicaCount: 0
-  # OpenShift compatibility
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: false
 
 # Bundled Kafka configuration (KRaft mode - message broker)
 kafka:
@@ -232,11 +222,6 @@ kafka:
       protocol: PLAINTEXT
     interbroker:
       protocol: PLAINTEXT
-  # OpenShift compatibility
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: false
 
 # Bundled ClickHouse configuration (analytics database - heaviest component)
 clickhouse:
@@ -250,11 +235,6 @@ clickhouse:
       requests:
         cpu: "2"
         memory: "8Gi"
-  # OpenShift compatibility
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: false
 
 # Zookeeper for ClickHouse coordination
 zookeeper:
@@ -268,11 +248,6 @@ zookeeper:
       cpu: "500m"
       memory: "1Gi"
   heapSize: 768
-  # OpenShift compatibility
-  podSecurityContext:
-    enabled: false
-  containerSecurityContext:
-    enabled: false
 
 # S3 Storage configuration (Ceph RGW from OpenShift Data Foundation)
 filestore:
@@ -317,15 +292,3 @@ hooks:
 serviceAccount:
   create: true
   annotations: {}
-
-# Pod security context for OpenShift compatibility
-securityContext:
-  fsGroup: null
-  runAsUser: null
-  runAsGroup: null
-
-containerSecurityContext:
-  allowPrivilegeEscalation: false
-  capabilities:
-    drop:
-      - ALL
