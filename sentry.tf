@@ -92,6 +92,7 @@ resource "kubernetes_secret" "sentry_secrets" {
 
 # OpenShift SCC - Grant anyuid to default SA for stateful services
 # ClickHouse, PostgreSQL, Redis, Kafka, Zookeeper need to run as specific UIDs
+# Note: Sentry chart uses 'default' SA by default (serviceAccount.enabled: false)
 resource "kubernetes_manifest" "sentry_anyuid_scc" {
   depends_on = [kubernetes_namespace.sentry]
   manifest = {
@@ -109,31 +110,6 @@ resource "kubernetes_manifest" "sentry_anyuid_scc" {
       {
         kind      = "ServiceAccount"
         name      = "default"
-        namespace = "sentry"
-      },
-      {
-        kind      = "ServiceAccount"
-        name      = "sentry-clickhouse"
-        namespace = "sentry"
-      },
-      {
-        kind      = "ServiceAccount"
-        name      = "sentry-postgresql"
-        namespace = "sentry"
-      },
-      {
-        kind      = "ServiceAccount"
-        name      = "sentry-redis"
-        namespace = "sentry"
-      },
-      {
-        kind      = "ServiceAccount"
-        name      = "sentry-kafka"
-        namespace = "sentry"
-      },
-      {
-        kind      = "ServiceAccount"
-        name      = "sentry-zookeeper"
         namespace = "sentry"
       }
     ]
