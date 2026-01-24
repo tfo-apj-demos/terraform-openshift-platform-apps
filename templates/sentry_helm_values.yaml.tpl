@@ -150,13 +150,9 @@ relay:
       memory: "1Gi"
 
 # Symbolicator configuration (stack trace processing - CPU intensive)
+# Disabled due to OpenShift permission issues with the container image
 symbolicator:
-  enabled: true
-  replicas: 1
-  resources:
-    requests:
-      cpu: "1"
-      memory: "2Gi"
+  enabled: false
 
 # Vroom configuration (profiling service)
 vroom:

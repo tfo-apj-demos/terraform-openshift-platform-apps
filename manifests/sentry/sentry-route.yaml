@@ -8,7 +8,7 @@ metadata:
 spec:
   host: sentry.apps.openshift-01.hashicorp.local
   port:
-    targetPort: 9000
+    targetPort: 8080
   tls:
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
