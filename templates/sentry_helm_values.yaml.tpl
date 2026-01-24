@@ -287,16 +287,6 @@ config:
 hooks:
   enabled: true
   removeOnSuccess: true
-  dbCheck:
-    resources:
-      requests:
-        cpu: "250m"
-        memory: "512Mi"
-  dbInit:
-    resources:
-      requests:
-        cpu: "1"
-        memory: "2Gi"
 
 # Service account configuration
 serviceAccount:
