@@ -27,12 +27,24 @@ data:
         check_interval: 1s
         limit_mib: 512
         spike_limit_mib: 128
+      # Transform processor to promote log attributes to resource attributes
+      # This allows Loki to index these as labels for efficient querying
+      transform/logs:
+        log_statements:
+          - context: log
+            statements:
+              # Copy key attributes to resource for Loki label indexing
+              - set(resource.attributes["tool_name"], attributes["tool_name"]) where attributes["tool_name"] != nil
+              - set(resource.attributes["event_name"], attributes["event_name"]) where attributes["event_name"] != nil
+              - set(resource.attributes["success"], attributes["success"]) where attributes["success"] != nil
+              - set(resource.attributes["error"], attributes["error"]) where attributes["error"] != nil
 
     exporters:
       # Prometheus exporter for metrics
+      # NOTE: Do NOT add namespace here - Claude Code already prefixes metrics with "claude_code_"
+      # Adding namespace would result in double-prefixed metrics like "claude_code_claude_code_*"
       prometheus:
         endpoint: "0.0.0.0:8889"
-        namespace: claude_code
         const_labels:
           collector: otel-collector
         resource_to_telemetry_conversion:
@@ -45,6 +57,7 @@ data:
           insecure: true
 
       # OTLP HTTP exporter for logs to Loki
+      # NOTE: Loki must have OTLP ingestion enabled (limits.otlp_config.resource_attributes and distributor.otlp_config)
       otlphttp/loki:
         endpoint: "http://loki-gateway.monitoring.svc.cluster.local:80/otlp"
         tls:
@@ -78,5 +91,5 @@ data:
           exporters: [prometheus, prometheusremotewrite]
         logs:
           receivers: [otlp]
-          processors: [memory_limiter, batch]
+          processors: [memory_limiter, transform/logs, batch]
           exporters: [otlphttp/loki, debug]

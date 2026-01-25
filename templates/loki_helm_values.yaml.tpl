@@ -20,6 +20,17 @@ loki:
   commonConfig:
     replication_factor: 1
 
+  # OTLP configuration for receiving logs via OpenTelemetry protocol
+  # This enables the /otlp endpoint for OTEL collector to push logs
+  distributor:
+    otlp_config:
+      default_resource_attributes_as_index_labels:
+        - service.name
+        - tool_name
+        - event_name
+        - success
+        - error
+
   # Schema configuration
   schemaConfig:
     configs:
@@ -51,6 +62,8 @@ loki:
     split_queries_by_interval: 1h
     reject_old_samples: true
     reject_old_samples_max_age: 168h  # 7 days
+    # Allow OTLP structured metadata - stores attributes alongside logs
+    allow_structured_metadata: true
 
   # Query range tuning
   query_range:

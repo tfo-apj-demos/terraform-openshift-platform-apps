@@ -187,6 +187,18 @@ configmapReload:
 #     static_configs:
 #       - targets: ['vault.vault.svc.cluster.local:8200']
 
+# OpenTelemetry Collector scrape job for Claude Code metrics
+# This provides a direct, explicit scrape of the OTEL collector's prometheus exporter
+extraScrapeConfigs: |
+  - job_name: 'otel-collector'
+    scrape_interval: 15s
+    static_configs:
+      - targets: ['otel-collector.monitoring.svc.cluster.local:8889']
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'claude.*|otelcol.*'
+        action: keep
+
 # Server scrape configuration
 serverFiles:
   prometheus.yml:
