@@ -1,8 +1,8 @@
 locals {
-  aap-vault-auth-sa = file("${path.module}/manifests/ansible/aap-vault-auth-sa.yaml")
-  aap-platform = file("${path.module}/manifests/ansible/aap-platform.yaml")
-  aap-pki = file("${path.module}/manifests/ansible/crd-pki-aapcert.yaml")
-  aap-vaultauth = file("${path.module}/manifests/ansible/crd-vault-auth.yaml")
+  aap-vault-auth-sa   = file("${path.module}/manifests/ansible/aap-vault-auth-sa.yaml")
+  aap-platform        = file("${path.module}/manifests/ansible/aap-platform.yaml")
+  aap-pki             = file("${path.module}/manifests/ansible/crd-pki-aapcert.yaml")
+  aap-vaultauth       = file("${path.module}/manifests/ansible/crd-vault-auth.yaml")
   aap-vaultconnection = file("${path.module}/manifests/ansible/crd-vault-connection.yaml")
 }
 

@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    app: prometheus
+    app.kubernetes.io/managed-by: terraform
+spec:
+  host: prometheus.apps.openshift-01.hashicorp.local
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: prometheus-server
+    weight: 100
+  wildcardPolicy: None

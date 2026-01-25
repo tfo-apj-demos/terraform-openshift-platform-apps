@@ -1,7 +1,7 @@
 locals {
 
-    gitlab_crd = file("${path.module}/manifests/gitlab/crd-gitlab.yaml")
-    gitlab_route = file("${path.module}/manifests/gitlab/gitlab-route.yaml")
+  gitlab_crd   = file("${path.module}/manifests/gitlab/crd-gitlab.yaml")
+  gitlab_route = file("${path.module}/manifests/gitlab/gitlab-route.yaml")
 }
 
 

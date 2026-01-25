@@ -3,5 +3,5 @@ locals {
 }
 
 resource "kubernetes_manifest" "db2" {
-    manifest = provider::kubernetes::manifest_decode(local.db2_instance)
+  manifest = provider::kubernetes::manifest_decode(local.db2_instance)
 }

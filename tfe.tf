@@ -4,21 +4,21 @@ import {
 }
 
 locals {
-  tfe_route = file("${path.module}/manifests/tfe/tfe-route.yaml")
+  tfe_route       = file("${path.module}/manifests/tfe/tfe-route.yaml")
   hcp_tf_operator = file("${path.module}/manifests/tfe/hcp-tf-operator.yaml")
 }
 
 
 # deploy tfe using helm chart
 resource "helm_release" "tfe" {
-  name       = "terraform-enterprise"
-  repository = "https://helm.releases.hashicorp.com"
-  chart      = "terraform-enterprise"
-  version    = "1.3.2"
+  name             = "terraform-enterprise"
+  repository       = "https://helm.releases.hashicorp.com"
+  chart            = "terraform-enterprise"
+  version          = "1.3.2"
   create_namespace = false
-  namespace = "tfe"
-  wait = false
-  force_update = true
+  namespace        = "tfe"
+  wait             = false
+  force_update     = true
 
   values = [
     local.tfe_helm_values

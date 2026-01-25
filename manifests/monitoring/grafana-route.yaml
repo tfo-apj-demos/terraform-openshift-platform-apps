@@ -1,0 +1,20 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: grafana
+  namespace: monitoring
+  labels:
+    app: grafana
+    app.kubernetes.io/managed-by: terraform
+spec:
+  host: grafana.apps.openshift-01.hashicorp.local
+  port:
+    targetPort: service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: grafana
+    weight: 100
+  wildcardPolicy: None

@@ -55,108 +55,140 @@ variable "gitlab_runner_token" {
   sensitive   = true
 }
 
-# Langfuse Configuration
-variable "langfuse_nextauth_secret" {
-  description = "NextAuth secret for Langfuse session encryption. Generate with: openssl rand -hex 32"
+# # Langfuse Configuration
+# variable "langfuse_nextauth_secret" {
+#   description = "NextAuth secret for Langfuse session encryption. Generate with: openssl rand -hex 32"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "langfuse_salt" {
+#   description = "Salt for Langfuse password hashing. Generate with: openssl rand -hex 32"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "langfuse_encryption_key" {
+#   description = "Encryption key for Langfuse data encryption. Generate with: openssl rand -hex 32"
+#   type        = string
+#   sensitive   = true
+#   default     = ""
+# }
+
+# variable "langfuse_postgres_password" {
+#   description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "langfuse_clickhouse_password" {
+#   description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "langfuse_redis_password" {
+#   description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# # Sentry Configuration
+# variable "sentry_secret_key" {
+#   description = "Secret key for Sentry encryption. Generate with: openssl rand -hex 32"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_admin_email" {
+#   description = "Email address for the Sentry admin user"
+#   type        = string
+#   default     = "admin@example.com"
+# }
+
+# variable "sentry_admin_password" {
+#   description = "Password for the Sentry admin user. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_postgres_password" {
+#   description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_redis_password" {
+#   description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_clickhouse_password" {
+#   description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_kafka_password" {
+#   description = "Password for the bundled Kafka. Generate with: openssl rand -base64 24"
+#   type        = string
+#   sensitive   = true
+# }
+
+# variable "sentry_mail_host" {
+#   description = "SMTP mail server host for Sentry notifications"
+#   type        = string
+#   default     = ""
+# }
+
+# variable "sentry_mail_port" {
+#   description = "SMTP mail server port"
+#   type        = number
+#   default     = 587
+# }
+
+# variable "sentry_mail_username" {
+#   description = "SMTP mail server username"
+#   type        = string
+#   default     = ""
+# }
+
+# variable "sentry_mail_password" {
+#   description = "SMTP mail server password"
+#   type        = string
+#   sensitive   = true
+#   default     = ""
+# }
+
+# Monitoring Stack Configuration (Prometheus & Grafana)
+variable "grafana_admin_password" {
+  description = "Password for the Grafana admin user. Generate with: openssl rand -base64 24"
   type        = string
   sensitive   = true
+  default     = "admin"
 }
 
-variable "langfuse_salt" {
-  description = "Salt for Langfuse password hashing. Generate with: openssl rand -hex 32"
+variable "prometheus_helm_version" {
+  description = "Prometheus Helm chart version"
   type        = string
-  sensitive   = true
+  default     = "25.27.0"
 }
 
-variable "langfuse_encryption_key" {
-  description = "Encryption key for Langfuse data encryption. Generate with: openssl rand -hex 32"
+variable "grafana_helm_version" {
+  description = "Grafana Helm chart version"
   type        = string
-  sensitive   = true
-  default     = ""
+  default     = "8.8.2"
 }
 
-variable "langfuse_postgres_password" {
-  description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
+variable "loki_helm_version" {
+  description = "Loki Helm chart version"
   type        = string
-  sensitive   = true
+  default     = "6.24.0"
 }
 
-variable "langfuse_clickhouse_password" {
-  description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
+variable "monitoring_storage_class" {
+  description = "Storage class for Prometheus, Grafana, and Loki persistent volumes"
   type        = string
-  sensitive   = true
-}
-
-variable "langfuse_redis_password" {
-  description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-# Sentry Configuration
-variable "sentry_secret_key" {
-  description = "Secret key for Sentry encryption. Generate with: openssl rand -hex 32"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_admin_email" {
-  description = "Email address for the Sentry admin user"
-  type        = string
-  default     = "admin@example.com"
-}
-
-variable "sentry_admin_password" {
-  description = "Password for the Sentry admin user. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_postgres_password" {
-  description = "Password for the bundled PostgreSQL database. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_redis_password" {
-  description = "Password for the bundled Redis cache. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_clickhouse_password" {
-  description = "Password for the bundled ClickHouse database. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_kafka_password" {
-  description = "Password for the bundled Kafka. Generate with: openssl rand -base64 24"
-  type        = string
-  sensitive   = true
-}
-
-variable "sentry_mail_host" {
-  description = "SMTP mail server host for Sentry notifications"
-  type        = string
-  default     = ""
-}
-
-variable "sentry_mail_port" {
-  description = "SMTP mail server port"
-  type        = number
-  default     = 587
-}
-
-variable "sentry_mail_username" {
-  description = "SMTP mail server username"
-  type        = string
-  default     = ""
-}
-
-variable "sentry_mail_password" {
-  description = "SMTP mail server password"
-  type        = string
-  sensitive   = true
-  default     = ""
+  default     = "ocs-storagecluster-cephfs"
 }

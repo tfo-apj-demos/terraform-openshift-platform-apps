@@ -3,5 +3,5 @@ locals {
 }
 
 resource "kubernetes_manifest" "keycloak" {
-    manifest = provider::kubernetes::manifest_decode(local.keycloak_instance)
+  manifest = provider::kubernetes::manifest_decode(local.keycloak_instance)
 }
