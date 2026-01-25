@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+  namespace: monitoring
+  labels:
+    app: otel-collector
+    app.kubernetes.io/name: otel-collector
+    app.kubernetes.io/component: config
+    app.kubernetes.io/managed-by: terraform
+data:
+  otel-collector-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+
+    processors:
+      batch:
+        timeout: 10s
+        send_batch_size: 1024
+        send_batch_max_size: 2048
+      memory_limiter:
+        check_interval: 1s
+        limit_mib: 512
+        spike_limit_mib: 128
+
+    exporters:
+      # Prometheus exporter for metrics
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        namespace: claude_code
+        const_labels:
+          collector: otel-collector
+        resource_to_telemetry_conversion:
+          enabled: true
+
+      # Prometheus remote write to push metrics to Prometheus server
+      prometheusremotewrite:
+        endpoint: "http://prometheus-server.monitoring.svc.cluster.local:80/api/v1/write"
+        tls:
+          insecure: true
+
+      # OTLP HTTP exporter for logs to Loki
+      otlphttp/loki:
+        endpoint: "http://loki-gateway.monitoring.svc.cluster.local:80/otlp"
+        tls:
+          insecure: true
+
+      # Debug exporter for troubleshooting (optional, can be removed in production)
+      debug:
+        verbosity: basic
+        sampling_initial: 5
+        sampling_thereafter: 200
+
+    extensions:
+      health_check:
+        endpoint: 0.0.0.0:13133
+      pprof:
+        endpoint: 0.0.0.0:1777
+      zpages:
+        endpoint: 0.0.0.0:55679
+
+    service:
+      extensions: [health_check, pprof, zpages]
+      telemetry:
+        logs:
+          level: info
+        metrics:
+          level: detailed
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [prometheus, prometheusremotewrite]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, batch]
+          exporters: [otlphttp/loki, debug]

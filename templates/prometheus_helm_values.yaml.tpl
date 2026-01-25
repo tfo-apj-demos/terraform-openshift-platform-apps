@@ -12,6 +12,10 @@
 server:
   enabled: true
 
+  # Enable remote write receiver for OTEL collector to push metrics
+  extraArgs:
+    web.enable-remote-write-receiver: ""
+
   # Global scrape settings
   global:
     scrape_interval: 30s

@@ -1,0 +1,49 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: otel-collector-grpc
+  namespace: monitoring
+  labels:
+    app: otel-collector
+    app.kubernetes.io/name: otel-collector
+    app.kubernetes.io/component: route
+    app.kubernetes.io/managed-by: terraform
+  annotations:
+    # Enable HTTP/2 for gRPC support
+    haproxy.router.openshift.io/balance: roundrobin
+    haproxy.router.openshift.io/timeout: 60s
+spec:
+  host: otel-collector-grpc.apps.openshift-01.hashicorp.local
+  port:
+    targetPort: otlp-grpc
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: otel-collector
+    weight: 100
+  wildcardPolicy: None
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: otel-collector-http
+  namespace: monitoring
+  labels:
+    app: otel-collector
+    app.kubernetes.io/name: otel-collector
+    app.kubernetes.io/component: route
+    app.kubernetes.io/managed-by: terraform
+spec:
+  host: otel-collector.apps.openshift-01.hashicorp.local
+  port:
+    targetPort: otlp-http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: otel-collector
+    weight: 100
+  wildcardPolicy: None
