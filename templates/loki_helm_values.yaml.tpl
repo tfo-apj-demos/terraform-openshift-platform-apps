@@ -187,6 +187,10 @@ gateway:
   ingress:
     enabled: false
 
+  # OpenShift uses different DNS resolver than standard k8s
+  nginxConfig:
+    resolver: "dns-default.openshift-dns.svc.cluster.local."
+
 # Bundled MinIO for S3-compatible storage
 minio:
   enabled: true
@@ -219,6 +223,11 @@ minio:
   containerSecurityContext:
     allowPrivilegeEscalation: false
     runAsNonRoot: true
+
+  # CRITICAL: Disable MinIO's SCC creation - it creates a malformed SCC
+  # that breaks pod scheduling. We use existing nonroot-v2 SCC instead.
+  securityContextConstraints:
+    enabled: false
 
 # Result caching
 resultsCache:

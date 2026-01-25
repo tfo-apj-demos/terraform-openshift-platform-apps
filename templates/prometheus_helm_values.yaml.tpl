@@ -12,6 +12,11 @@
 server:
   enabled: true
 
+  # Global scrape settings
+  global:
+    scrape_interval: 30s
+    evaluation_interval: 30s
+
   # Run as non-root user for OpenShift compatibility
   securityContext:
     runAsNonRoot: true
@@ -178,13 +183,9 @@ configmapReload:
 #     static_configs:
 #       - targets: ['vault.vault.svc.cluster.local:8200']
 
-# Server global configuration
+# Server scrape configuration
 serverFiles:
   prometheus.yml:
-    global:
-      scrape_interval: 30s
-      evaluation_interval: 30s
-
     rule_files:
       - /etc/config/recording_rules.yml
       - /etc/config/alerting_rules.yml
