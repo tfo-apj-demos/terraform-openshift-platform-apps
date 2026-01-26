@@ -2391,7 +2391,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(claude_code_commit_count{session_id=~\"$session_id\"}[$__range]))",
+          "expr": "max(claude_code_commit_count_total{session_id=~\"$session_id\"})",
           "legendFormat": "Commits",
           "range": true,
           "refId": "A"
@@ -2457,7 +2457,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(claude_code_pull_request_count{session_id=~\"$session_id\"}[$__range]))",
+          "expr": "max(claude_code_pull_request_count_total{session_id=~\"$session_id\"})",
           "legendFormat": "PRs",
           "range": true,
           "refId": "A"
