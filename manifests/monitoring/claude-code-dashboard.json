@@ -2605,7 +2605,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "(sum(claude_code_code_edit_tool_decision{decision=\"accept\"}) / sum(claude_code_code_edit_tool_decision)) * 100",
+          "expr": "(sum(claude_code_code_edit_tool_decision_total{decision=\"accept\"}) / sum(claude_code_code_edit_tool_decision_total)) * 100",
           "legendFormat": "Acceptance Rate",
           "range": true,
           "refId": "A"
