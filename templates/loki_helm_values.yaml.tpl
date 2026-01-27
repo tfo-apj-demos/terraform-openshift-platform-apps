@@ -26,10 +26,24 @@ loki:
     otlp_config:
       default_resource_attributes_as_index_labels:
         - service.name
+        # Core tool execution attributes
         - tool_name
         - event_name
         - success
         - error
+        # Session correlation for workflow analysis
+        - session_id
+        # Performance analysis
+        - duration_ms
+        # Decision tracking for permission analysis
+        - decision
+        - source
+        # API error specific fields
+        - status_code
+        - attempt
+        # Model and cost tracking
+        - model
+        - cost_usd
 
   # Schema configuration
   schemaConfig:
