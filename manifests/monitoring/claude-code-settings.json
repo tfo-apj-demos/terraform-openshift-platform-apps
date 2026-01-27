@@ -1,0 +1,45 @@
+{
+  "_documentation": {
+    "description": "Claude Code settings for OpenTelemetry telemetry integration",
+    "usage": [
+      "Copy the 'env' block to your Claude Code settings file.",
+      "Location: ~/.config/claude-code/settings.json (Linux/macOS)",
+      "Or: %APPDATA%\\claude-code\\settings.json (Windows)",
+      "Alternatively, use 'claude config set' commands for individual settings."
+    ],
+    "environment_variables": {
+      "CLAUDE_CODE_ENABLE_TELEMETRY": "Enable/disable telemetry (1=enabled, 0=disabled)",
+      "OTEL_METRICS_EXPORTER": "Metrics export format: otlp, console, or none",
+      "OTEL_LOGS_EXPORTER": "Logs export format: otlp, console, or none",
+      "OTEL_EXPORTER_OTLP_PROTOCOL": "Transport protocol: http/protobuf or grpc",
+      "OTEL_EXPORTER_OTLP_ENDPOINT": "URL of the OTEL collector receiving telemetry",
+      "OTEL_METRIC_EXPORT_INTERVAL": "How often metrics are sent (milliseconds)",
+      "OTEL_LOGS_EXPORT_INTERVAL": "How often logs are sent (milliseconds)",
+      "OTEL_METRICS_INCLUDE_SESSION_ID": "Include session ID for per-session tracking",
+      "OTEL_METRICS_INCLUDE_ACCOUNT_UUID": "Include account UUID for per-user tracking",
+      "OTEL_LOG_USER_PROMPTS": "Log actual prompt content (privacy sensitive)"
+    },
+    "endpoint_options": {
+      "local": "http://localhost:4318 (for local collector or port-forward)",
+      "openshift_route": "https://otel-collector.apps.your-cluster.example.com",
+      "openshift_service": "http://otel-collector.monitoring.svc.cluster.local:4318"
+    },
+    "privacy_notes": [
+      "OTEL_LOG_USER_PROMPTS=1 will log your actual prompts - use with caution",
+      "Set OTEL_METRICS_INCLUDE_SESSION_ID=false for aggregated-only metrics",
+      "API keys and file contents are never included in telemetry"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "OTEL_METRICS_EXPORTER": "otlp",
+    "OTEL_LOGS_EXPORTER": "otlp",
+    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "http://localhost:4318",
+    "OTEL_METRIC_EXPORT_INTERVAL": "10000",
+    "OTEL_LOGS_EXPORT_INTERVAL": "5000",
+    "OTEL_METRICS_INCLUDE_SESSION_ID": "true",
+    "OTEL_METRICS_INCLUDE_ACCOUNT_UUID": "true",
+    "OTEL_LOG_USER_PROMPTS": "0"
+  }
+}
