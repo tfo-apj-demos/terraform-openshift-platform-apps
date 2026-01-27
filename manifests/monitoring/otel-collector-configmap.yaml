@@ -33,11 +33,25 @@ data:
         log_statements:
           - context: log
             statements:
-              # Copy key attributes to resource for Loki label indexing
+              # Core attributes for all events
               - set(resource.attributes["tool_name"], attributes["tool_name"]) where attributes["tool_name"] != nil
               - set(resource.attributes["event_name"], attributes["event_name"]) where attributes["event_name"] != nil
               - set(resource.attributes["success"], attributes["success"]) where attributes["success"] != nil
               - set(resource.attributes["error"], attributes["error"]) where attributes["error"] != nil
+              # Session tracking for workflow correlation
+              - set(resource.attributes["session_id"], attributes["session_id"]) where attributes["session_id"] != nil
+              # Duration for performance analysis
+              - set(resource.attributes["duration_ms"], attributes["duration_ms"]) where attributes["duration_ms"] != nil
+              # Decision tracking for permission analysis
+              - set(resource.attributes["decision"], attributes["decision"]) where attributes["decision"] != nil
+              - set(resource.attributes["source"], attributes["source"]) where attributes["source"] != nil
+              # API error specific fields
+              - set(resource.attributes["status_code"], attributes["status_code"]) where attributes["status_code"] != nil
+              - set(resource.attributes["attempt"], attributes["attempt"]) where attributes["attempt"] != nil
+              # Model tracking
+              - set(resource.attributes["model"], attributes["model"]) where attributes["model"] != nil
+              # Cost tracking
+              - set(resource.attributes["cost_usd"], attributes["cost_usd"]) where attributes["cost_usd"] != nil
 
     exporters:
       # Prometheus exporter for metrics
