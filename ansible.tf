@@ -19,8 +19,6 @@ resource "kubernetes_manifest" "aap-sa" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vault-auth-sa)
 }
 
-
-
 resource "kubernetes_manifest" "aap-pki" {
   manifest = provider::kubernetes::manifest_decode(local.aap-pki)
 }

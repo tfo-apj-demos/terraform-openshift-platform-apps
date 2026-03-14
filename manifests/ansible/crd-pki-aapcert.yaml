@@ -14,6 +14,7 @@ spec:
       name: aap-gateway
   role: gcve
   mount: pki
+  expiryOffset: 1h
   commonName: aap-aap.apps.openshift-01.hashicorp.local
   format: pem_bundle
   vaultAuthRef: vaultauth-aap
