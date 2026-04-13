@@ -13,7 +13,6 @@ locals {
   })
 
   grafana_helm_values = templatefile("${path.module}/templates/grafana_helm_values.yaml.tpl", {
-    admin_password = var.grafana_admin_password
     prometheus_url = "http://prometheus-server.monitoring.svc.cluster.local:80"
     loki_url       = "http://loki-gateway.monitoring.svc.cluster.local:80"
     storage_class  = var.monitoring_storage_class
@@ -181,6 +180,11 @@ resource "helm_release" "grafana" {
   timeout          = 600
 
   values = [local.grafana_helm_values]
+
+  set_sensitive {
+    name  = "adminPassword"
+    value = var.grafana_admin_password
+  }
 }
 
 # OpenShift Route for Prometheus

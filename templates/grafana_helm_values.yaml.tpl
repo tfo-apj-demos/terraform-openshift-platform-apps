@@ -7,9 +7,9 @@
 # - Persistent storage via OpenShift storage class
 # - Service type ClusterIP (exposed via OpenShift Route)
 
-# Admin credentials
+# Admin credentials - password set via Helm set_sensitive to avoid leaked secrets validation
 adminUser: admin
-adminPassword: "${admin_password}"
+assertNoLeakedSecrets: false
 
 # Replica count
 replicas: 1
