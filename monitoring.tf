@@ -94,7 +94,7 @@ resource "kubernetes_manifest" "monitoring_nonroot_scc" {
   }
 }
 
-# Node exporter requires hostaccess SCC for host metrics
+# Node exporter requires privileged SCC for hostNetwork, hostPID, hostPath, and custom UID
 resource "kubernetes_manifest" "monitoring_hostaccess_scc" {
   depends_on = [kubernetes_namespace.monitoring]
   manifest = {
@@ -106,12 +106,36 @@ resource "kubernetes_manifest" "monitoring_hostaccess_scc" {
     roleRef = {
       apiGroup = "rbac.authorization.k8s.io"
       kind     = "ClusterRole"
-      name     = "system:openshift:scc:hostaccess"
+      name     = "system:openshift:scc:privileged"
     }
     subjects = [
       {
         kind      = "ServiceAccount"
         name      = "prometheus-prometheus-node-exporter"
+        namespace = "monitoring"
+      }
+    ]
+  }
+}
+
+# Loki MinIO requires anyuid SCC to run as UID 1000
+resource "kubernetes_manifest" "monitoring_anyuid_scc" {
+  depends_on = [kubernetes_namespace.monitoring]
+  manifest = {
+    apiVersion = "rbac.authorization.k8s.io/v1"
+    kind       = "ClusterRoleBinding"
+    metadata = {
+      name = "monitoring-anyuid-scc"
+    }
+    roleRef = {
+      apiGroup = "rbac.authorization.k8s.io"
+      kind     = "ClusterRole"
+      name     = "system:openshift:scc:anyuid"
+    }
+    subjects = [
+      {
+        kind      = "ServiceAccount"
+        name      = "minio-sa"
         namespace = "monitoring"
       }
     ]
