@@ -16,5 +16,5 @@ spec:
   mount: pki
   expiryOffset: 24h
   commonName: keycloak.hashicorp.local
-  format: pem_bundle
+  format: pem
   vaultAuthRef: vaultauth-keycloak
