@@ -1,0 +1,20 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultPKISecret
+metadata:
+  name: keycloakcert
+  namespace: keycloak
+spec:
+  destination:
+    create: true
+    overwrite: true
+    name: my-tls-secret
+    type: kubernetes.io/tls
+  rolloutRestartTargets:
+    - kind: StatefulSet
+      name: example-keycloak
+  role: gcve
+  mount: pki
+  expiryOffset: 24h
+  commonName: keycloak.hashicorp.local
+  format: pem_bundle
+  vaultAuthRef: vaultauth-keycloak
