@@ -120,9 +120,10 @@ kube-state-metrics:
       cpu: "500m"
       memory: "512Mi"
 
-# Node exporter for host-level metrics
+# Node exporter disabled - OpenShift already runs node-exporter in openshift-monitoring
+# on hostPort 9100. Running a second instance causes scheduling conflicts.
 prometheus-node-exporter:
-  enabled: true
+  enabled: false
 
   # Node exporter needs host access for system metrics
   # Uses hostaccess SCC in OpenShift
