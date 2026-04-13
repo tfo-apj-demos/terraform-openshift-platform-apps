@@ -10,4 +10,6 @@ spec:
   hostname:
     hostname: keycloak.hashicorp.local
   http:
-    tlsSecret: my-tls-secret
+    httpEnabled: true
+  proxy:
+    headers: xforwarded
