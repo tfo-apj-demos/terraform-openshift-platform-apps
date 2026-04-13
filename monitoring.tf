@@ -95,13 +95,14 @@ resource "kubernetes_manifest" "monitoring_nonroot_scc" {
 }
 
 # Node exporter requires privileged SCC for hostNetwork, hostPID, hostPath, and custom UID
-resource "kubernetes_manifest" "monitoring_hostaccess_scc" {
+# Note: renamed from monitoring-hostaccess-scc because roleRef cannot be changed on existing bindings
+resource "kubernetes_manifest" "monitoring_privileged_scc" {
   depends_on = [kubernetes_namespace.monitoring]
   manifest = {
     apiVersion = "rbac.authorization.k8s.io/v1"
     kind       = "ClusterRoleBinding"
     metadata = {
-      name = "monitoring-hostaccess-scc"
+      name = "monitoring-privileged-scc"
     }
     roleRef = {
       apiGroup = "rbac.authorization.k8s.io"
