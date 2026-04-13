@@ -144,78 +144,78 @@ resource "kubernetes_manifest" "monitoring_anyuid_scc" {
 }
 
 # Prometheus Helm Release
-# resource "helm_release" "prometheus" {
-#   depends_on = [
-#     kubernetes_namespace.monitoring,
-#     kubernetes_manifest.monitoring_nonroot_scc,
-#     kubernetes_manifest.monitoring_hostaccess_scc
-#   ]
-#
-#   name             = "prometheus"
-#   repository       = "https://prometheus-community.github.io/helm-charts"
-#   chart            = "prometheus"
-#   version          = var.prometheus_helm_version
-#   namespace        = "monitoring"
-#   create_namespace = false
-#   wait             = true
-#   timeout          = 600
-#
-#   values = [local.prometheus_helm_values]
-# }
+resource "helm_release" "prometheus" {
+  depends_on = [
+    kubernetes_namespace.monitoring,
+    kubernetes_manifest.monitoring_nonroot_scc,
+    kubernetes_manifest.monitoring_privileged_scc
+  ]
+
+  name             = "prometheus"
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  chart            = "prometheus"
+  version          = var.prometheus_helm_version
+  namespace        = "monitoring"
+  create_namespace = false
+  wait             = true
+  timeout          = 600
+
+  values = [local.prometheus_helm_values]
+}
 
 # Grafana Helm Release
-# resource "helm_release" "grafana" {
-#   depends_on = [
-#     kubernetes_namespace.monitoring,
-#     kubernetes_manifest.monitoring_nonroot_scc,
-#     helm_release.prometheus
-#   ]
-#
-#   name             = "grafana"
-#   repository       = "https://grafana.github.io/helm-charts"
-#   chart            = "grafana"
-#   version          = var.grafana_helm_version
-#   namespace        = "monitoring"
-#   create_namespace = false
-#   wait             = true
-#   timeout          = 600
-#
-#   values = [local.grafana_helm_values]
-# }
+resource "helm_release" "grafana" {
+  depends_on = [
+    kubernetes_namespace.monitoring,
+    kubernetes_manifest.monitoring_nonroot_scc,
+    helm_release.prometheus
+  ]
+
+  name             = "grafana"
+  repository       = "https://grafana.github.io/helm-charts"
+  chart            = "grafana"
+  version          = var.grafana_helm_version
+  namespace        = "monitoring"
+  create_namespace = false
+  wait             = true
+  timeout          = 600
+
+  values = [local.grafana_helm_values]
+}
 
 # OpenShift Route for Prometheus
-# resource "kubernetes_manifest" "prometheus_route" {
-#   depends_on = [helm_release.prometheus]
-#   manifest   = provider::kubernetes::manifest_decode(local.prometheus_route)
-# }
+resource "kubernetes_manifest" "prometheus_route" {
+  depends_on = [helm_release.prometheus]
+  manifest   = provider::kubernetes::manifest_decode(local.prometheus_route)
+}
 
 # OpenShift Route for Grafana
-# resource "kubernetes_manifest" "grafana_route" {
-#   depends_on = [helm_release.grafana]
-#   manifest   = provider::kubernetes::manifest_decode(local.grafana_route)
-# }
+resource "kubernetes_manifest" "grafana_route" {
+  depends_on = [helm_release.grafana]
+  manifest   = provider::kubernetes::manifest_decode(local.grafana_route)
+}
 
 # Loki Helm Release - Log aggregation
-# resource "helm_release" "loki" {
-#   depends_on = [
-#     kubernetes_namespace.monitoring,
-#     kubernetes_manifest.monitoring_nonroot_scc
-#   ]
-#
-#   name             = "loki"
-#   repository       = "https://grafana.github.io/helm-charts"
-#   chart            = "loki"
-#   version          = var.loki_helm_version
-#   namespace        = "monitoring"
-#   create_namespace = false
-#   wait             = true
-#   timeout          = 900 # Loki can take longer due to MinIO initialization
-#
-#   values = [local.loki_helm_values]
-# }
+resource "helm_release" "loki" {
+  depends_on = [
+    kubernetes_namespace.monitoring,
+    kubernetes_manifest.monitoring_nonroot_scc
+  ]
+
+  name             = "loki"
+  repository       = "https://grafana.github.io/helm-charts"
+  chart            = "loki"
+  version          = var.loki_helm_version
+  namespace        = "monitoring"
+  create_namespace = false
+  wait             = true
+  timeout          = 900 # Loki can take longer due to MinIO initialization
+
+  values = [local.loki_helm_values]
+}
 
 # OpenShift Route for Loki Gateway
-# resource "kubernetes_manifest" "loki_route" {
-#   depends_on = [helm_release.loki]
-#   manifest   = provider::kubernetes::manifest_decode(local.loki_route)
-# }
+resource "kubernetes_manifest" "loki_route" {
+  depends_on = [helm_release.loki]
+  manifest   = provider::kubernetes::manifest_decode(local.loki_route)
+}
