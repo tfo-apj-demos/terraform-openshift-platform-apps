@@ -61,10 +61,9 @@ grafana.ini:
     root_url: "${root_url}"
     serve_from_sub_path: false
 
-  # Security settings
+  # Security settings - admin_password set via Helm set_sensitive
   security:
     admin_user: admin
-    admin_password: "${admin_password}"
     disable_initial_admin_creation: false
     cookie_secure: true
     strict_transport_security: true
