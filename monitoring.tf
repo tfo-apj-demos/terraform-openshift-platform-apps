@@ -143,6 +143,21 @@ resource "kubernetes_manifest" "monitoring_anyuid_scc" {
   }
 }
 
+import {
+  to = helm_release.prometheus
+  id = "monitoring/prometheus"
+}
+
+import {
+  to = helm_release.grafana
+  id = "monitoring/grafana"
+}
+
+import {
+  to = helm_release.loki
+  id = "monitoring/loki"
+}
+
 # Prometheus Helm Release
 resource "helm_release" "prometheus" {
   depends_on = [
