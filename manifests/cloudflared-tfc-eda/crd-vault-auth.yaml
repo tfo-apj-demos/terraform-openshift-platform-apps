@@ -1,0 +1,14 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: vaultauth-cloudflared-tfc-eda
+  namespace: cloudflared-tfc-eda
+spec:
+  vaultConnectionRef: vaultconnection-gcve
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: cloudflared-tfc-eda
+    serviceAccount: vault-auth
+    audiences:
+      - https://kubernetes.default.svc
