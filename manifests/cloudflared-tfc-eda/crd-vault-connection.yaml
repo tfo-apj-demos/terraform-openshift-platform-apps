@@ -1,8 +1,0 @@
-apiVersion: secrets.hashicorp.com/v1beta1
-kind: VaultConnection
-metadata:
-  name: vaultconnection-gcve
-  namespace: cloudflared-tfc-eda
-spec:
-  skipTLSVerify: true
-  address: 'https://vault.hashicorp.local:8200'

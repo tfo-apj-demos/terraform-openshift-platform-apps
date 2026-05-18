@@ -7,12 +7,11 @@ metadata:
     app.kubernetes.io/name: cloudflared
     app.kubernetes.io/component: tfc-eda-tunnel
 spec:
-  replicas: 2
+  # Quick tunnels are per-pod (each replica would get its own *.trycloudflare.com URL).
+  # Keep replicas=1 so we have a single, discoverable URL.
+  replicas: 1
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: cloudflared
@@ -26,16 +25,15 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
+          # Quick-tunnel (TryCloudflare) mode: anonymous, no token required.
+          # Cloudflare issues an ephemeral https://<random>.trycloudflare.com URL,
+          # printed to stdout once the tunnel establishes. URL changes on every
+          # pod restart -- discover via `kubectl -n cloudflared-tfc-eda logs deploy/cloudflared | grep trycloudflare.com`.
           args:
             - tunnel
             - --no-autoupdate
-            - run
-          env:
-            - name: TUNNEL_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: cloudflared-tunnel
-                  key: token
+            - --url
+            - http://tfc-notification-drift.aap.svc.cluster.local:5004
           resources:
             requests:
               cpu: 50m
