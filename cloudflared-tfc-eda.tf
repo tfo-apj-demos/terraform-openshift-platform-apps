@@ -1,28 +1,31 @@
-locals {
-  cloudflared_tfc_eda_namespace        = file("${path.module}/manifests/cloudflared-tfc-eda/namespace.yaml")
-  cloudflared_tfc_eda_deployment       = file("${path.module}/manifests/cloudflared-tfc-eda/deployment.yaml")
-  cloudflared_tfc_eda_np_aap_eda_ingress = file("${path.module}/manifests/cloudflared-tfc-eda/np-aap-eda-ingress.yaml")
+module "cloudflared_tfc_eda" {
+  source = "./modules/cloudflared-quick-tunnel"
+
+  name = "tfc-eda"
+  # Preserves the existing NetworkPolicy name from before this was modularised
+  # so the cutover doesn't open a brief default-allow window during the rename.
+  network_policy_name = "aap-eda-activation-from-cloudflared-only"
+
+  target_service_url   = "http://tfc-notification-drift.aap.svc.cluster.local:5004"
+  target_pod_namespace = "aap"
+  target_pod_selector  = { app = "eda" }
+  target_pod_port      = 5004
 }
 
-resource "kubernetes_manifest" "cloudflared_tfc_eda_namespace" {
-  manifest = provider::kubernetes::manifest_decode(local.cloudflared_tfc_eda_namespace)
+# Migrate state for resources that already exist under the old flat addresses.
+# kubernetes_manifest preserves the underlying object if the manifest content
+# is unchanged; minor label drift will be reconciled in-place by the apply.
+moved {
+  from = kubernetes_manifest.cloudflared_tfc_eda_namespace
+  to   = module.cloudflared_tfc_eda.kubernetes_manifest.namespace
 }
 
-resource "kubernetes_manifest" "cloudflared_tfc_eda_deployment" {
-  depends_on = [kubernetes_manifest.cloudflared_tfc_eda_namespace]
-  manifest   = provider::kubernetes::manifest_decode(local.cloudflared_tfc_eda_deployment)
-  field_manager {
-    force_conflicts = true
-  }
+moved {
+  from = kubernetes_manifest.cloudflared_tfc_eda_deployment
+  to   = module.cloudflared_tfc_eda.kubernetes_manifest.deployment
 }
 
-# Lives in the aap namespace (not cloudflared-tfc-eda) so it scopes to the
-# AAP-EDA activation pods. The cloudflared namespace is the only allowed source
-# of traffic to TCP/5004 on those pods.
-resource "kubernetes_manifest" "cloudflared_tfc_eda_np_aap_eda_ingress" {
-  depends_on = [kubernetes_manifest.cloudflared_tfc_eda_namespace]
-  manifest   = provider::kubernetes::manifest_decode(local.cloudflared_tfc_eda_np_aap_eda_ingress)
-  field_manager {
-    force_conflicts = true
-  }
+moved {
+  from = kubernetes_manifest.cloudflared_tfc_eda_np_aap_eda_ingress
+  to   = module.cloudflared_tfc_eda.kubernetes_manifest.network_policy
 }
