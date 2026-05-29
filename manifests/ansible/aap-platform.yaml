@@ -4,6 +4,13 @@ metadata:
   name: aap
   namespace: aap
 spec:
+  # Platform feature flags (install-time). OIDC workload-identity enables the
+  # "HashiCorp Vault Secret Lookup (OIDC)" / "Signed SSH (OIDC)" credential
+  # types so jobs auth to Vault with a per-job gateway-signed JWT instead of a
+  # static AppRole secret_id. Tech Preview in AAP 2.7. install-time => set here
+  # (the gateway Feature Flags UI cannot toggle it at runtime).
+  feature_flags:
+    FEATURE_OIDC_WORKLOAD_IDENTITY_ENABLED: true
   api:
   route_host: aap-aap.apps.openshift-01.hashicorp.local
   route_tls_secret: aap-certificate 
