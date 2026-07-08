@@ -9,6 +9,12 @@ resource "kubernetes_secret" "gitlab_runner_token" {
   data = {
     "runner-token" = var.gitlab_runner_token
   }
+
+  lifecycle {
+    # GitLab rotates the runner token at runtime, so the live secret data
+    # perpetually drifts from state. Ignore data to suppress the false drift.
+    ignore_changes = [data]
+  }
 }
 
 locals {
