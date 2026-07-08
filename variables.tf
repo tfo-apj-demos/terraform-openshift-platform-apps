@@ -43,13 +43,6 @@ variable "tfe_encryption_password" {
   default     = "terraformenterprise"
 }
 
-# AWX commented out — replaced by AAP (issue #20)
-# variable "awx_admin_password" {
-#   description = "The AWX admin password."
-#   type        = string
-#   sensitive   = true
-# }
-
 variable "gitlab_runner_token" {
   description = "The GitLab project runner token used to authenticate the runner with GitLab."
   type        = string
