@@ -27,6 +27,19 @@ resource "kubernetes_manifest" "aap-vaultauth" {
   manifest = provider::kubernetes::manifest_decode(local.aap-vaultauth)
 }
 
+# Lab CA (HCP Vault Issuing -> Central Signing -> Root, verified against Vault's
+# live leaf) so the VaultConnection can verify Vault's TLS instead of skipping it.
+resource "kubernetes_secret" "aap-vault-ca" {
+  metadata {
+    name      = "vault-ca"
+    namespace = "aap"
+  }
+  data = {
+    "ca.crt" = file("${path.module}/manifests/ansible/vault-ca.pem")
+  }
+}
+
 resource "kubernetes_manifest" "aap-vaultconnection" {
-  manifest = provider::kubernetes::manifest_decode(local.aap-vaultconnection)
+  depends_on = [kubernetes_secret.aap-vault-ca]
+  manifest   = provider::kubernetes::manifest_decode(local.aap-vaultconnection)
 }
